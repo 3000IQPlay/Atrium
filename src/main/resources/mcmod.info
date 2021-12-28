@@ -1,0 +1,17 @@
+[
+  {
+    "modid": "atrium",
+    "name": "Atrium",
+    "description": "1.12.2 PvP Hack",
+    "version": "1.5.6",
+    "mcversion": "1.12.2",
+    "logoFile": "atrium.png",
+    "url": "https://discord.gg/YE3hrzxmSu",
+    "updateUrl": "",
+    "authorList": [
+      "_3000IQPlay"
+    ],
+    "screenshots": [],
+    "dependencies": []
+  }
+]
