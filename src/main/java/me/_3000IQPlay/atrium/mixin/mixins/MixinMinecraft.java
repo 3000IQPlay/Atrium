@@ -90,7 +90,7 @@ public abstract class MixinMinecraft {
         return !MultiTask.getInstance().isOn() && playerSP.isHandActive();
     }
 
-    @Redirect(method={"rightClickMouse"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/multiplayer/PlayerControllerMP;getIsHittingBlock()Z", ordinal=0), require=1)
+    @Redirect(method={"rightClickMouse"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/multiplayer/PlayerControllerMP;getIsHittingBlock()Z", ordinal=0))
     private boolean isHittingBlockHook(PlayerControllerMP playerControllerMP) {
         return !MultiTask.getInstance().isOn() && playerControllerMP.getIsHittingBlock();
     }
