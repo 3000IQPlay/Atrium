@@ -3,13 +3,13 @@ This was my first ever java project that im no longer working on. I actually sta
 
 Credit list:
 -----------------------------------------------------
-OyVey continued: PopChams                                
-Banzem: AutoCrystal, Quiver, SilentXP
-Incoming: OldFagDupe
-Wurst+3: NoEntityTrace
-SexMaster.CC: CrystalModify
-KuroHack: CevBreaker, PistonAura, AutoCity, FastEat
-Quantum: Flatten
-Legacy: BowAim
-DotGod.CC: FakePlayer
-Sushi.CC v2: PenisESP
+OyVey continued: PopChams <br />                             
+Banzem: AutoCrystal, Quiver, SilentXP <br />
+Incoming: OldFagDupe <br />
+Wurst+3: NoEntityTrace <br />
+SexMaster.CC: CrystalModify <br />
+KuroHack: CevBreaker, PistonAura, AutoCity, FastEat <br />
+Quantum: Flatten <br />
+Legacy: BowAim <br />
+DotGod.CC: FakePlayer <br />
+Sushi.CC v2: PenisESP <br />
