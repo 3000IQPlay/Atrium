@@ -20,7 +20,7 @@ public class CSGOWatermark extends Module {
 
     private String message = "";
     public CSGOWatermark() {
-        super("CSGOWatermark", "Thx to Banzem for this module", Module.Category.CLIENT, true, false, false);
+        super("CSGOWatermark", "CS:GO", Module.Category.CLIENT, true, false, false);
     }
 
     @Override
