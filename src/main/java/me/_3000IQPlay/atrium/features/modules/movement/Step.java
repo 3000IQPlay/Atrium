@@ -11,7 +11,7 @@ public class Step
         extends Module {
     private static Step instance;
     public Setting<Boolean> vanilla = this.register(new Setting<Boolean>("Vanilla", true));
-    public Setting<Integer> stepHeight = this.register(new Setting<Integer>("Height", 2, 1, 2));
+    public Setting<Integer> stepHeight = this.register(new Setting<Integer>("Height", 2, 1, 10));
     public Setting<Boolean> turnOff = this.register(new Setting<Boolean>("Disable", false));
 
     public Step() {
