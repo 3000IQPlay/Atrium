@@ -129,6 +129,10 @@ public class ModuleManager
 		this.modules.add(new PacketEat());
 		this.modules.add(new AntiDDoS());
 		this.modules.add(new AutoCity());
+	    	this.modules.add(new AntiLog4j());
+		this.modules.add(new AutoKickBow());
+		this.moduleColorMap.put(this.getModuleByClass(AutoKickBow.class), new Color(164, 63, 254));
+		this.moduleColorMap.put(this.getModuleByClass(AntiLog4j.class), new Color(74, 83, 46));
 		this.moduleColorMap.put(this.getModuleByClass(AutoCity.class), new Color(97, 173, 162));
 		this.moduleColorMap.put(this.getModuleByClass(AntiDDoS.class), new Color(172, 133, 192));
 		this.moduleColorMap.put(this.getModuleByClass(PacketEat.class), new Color(215, 81, 248));
