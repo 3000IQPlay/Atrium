@@ -5,7 +5,7 @@ Credit list:
 -----------------------------------------------------
 OyVey continued: PopChams <br />
 Banzem: AutoCrystal, Quiver, SilentXP <br />
-Incoming: OldFagDupe <br />
+Incoming: OldFagDupe, AutoBuilder <br />
 Wurst+3: NoEntityTrace <br />
 SexMaster.CC: CrystalModify <br />
 KuroHack: CevBreaker, PistonAura, AutoCity, FastEat <br />
