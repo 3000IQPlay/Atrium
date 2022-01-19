@@ -3,7 +3,7 @@ package me._3000IQPlay.atrium.util;
 import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.features.modules.client.Managers;
 import me._3000IQPlay.atrium.features.modules.combat.Killaura;
-import me._3000IQPlay.atrium.features.modules.exploit.Blink;
+import me._3000IQPlay.atrium.features.modules.player.Blink;
 import me._3000IQPlay.atrium.features.modules.player.FakePlayer;
 import me._3000IQPlay.atrium.features.modules.player.Freecam;
 import me._3000IQPlay.atrium.mixin.mixins.accessors.IEntityLivingBase;
