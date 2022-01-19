@@ -8,9 +8,7 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class IconUtil {
-
     public static final IconUtil INSTANCE = new IconUtil();
-
 
     public ByteBuffer readImageToBuffer(InputStream inputStream) throws IOException {
         BufferedImage bufferedimage = ImageIO.read(inputStream);
@@ -20,6 +18,4 @@ public class IconUtil {
         bytebuffer.flip();
         return bytebuffer;
     }
-
-
 }
