@@ -46,7 +46,6 @@ public class ModuleManager
         this.modules.add(new MCF());
         this.modules.add(new AutoLog());
         this.modules.add(new AutoReconnect());
-        this.modules.add(new Logger());
         this.modules.add(new RPC());
         this.modules.add(new AutoGG());
         this.modules.add(new ReverseStep());
@@ -183,7 +182,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(AutoReconnect.class), new Color(17, 85, 153));
         this.moduleColorMap.put(this.getModuleByClass(BuildHeight.class), new Color(64, 136, 199));
         this.moduleColorMap.put(this.getModuleByClass(ChatModifier.class), new Color(255, 59, 216));
-        this.moduleColorMap.put(this.getModuleByClass(Logger.class), new Color(186, 0, 109));
         this.moduleColorMap.put(this.getModuleByClass(MCF.class), new Color(17, 85, 255));
 		this.moduleColorMap.put(this.getModuleByClass(NoRotate.class), new Color(69, 81, 223));
         this.moduleColorMap.put(this.getModuleByClass(RPC.class), new Color(0, 64, 255));
