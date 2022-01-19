@@ -122,7 +122,6 @@ public class ModuleManager
 		this.modules.add(new OldFagDupe());
 		this.modules.add(new MountBypass());
 		this.modules.add(new PenisESP());
-		this.modules.add(new AutoBuilder());
 		this.modules.add(new CevBreaker());
 		this.modules.add(new NoGlitchBlocks());
 		this.modules.add(new PistonAura());
@@ -141,7 +140,6 @@ public class ModuleManager
 		this.moduleColorMap.put(this.getModuleByClass(PistonAura.class), new Color(85, 94, 58));
 		this.moduleColorMap.put(this.getModuleByClass(NoGlitchBlocks.class), new Color(53, 86, 134));
 		this.moduleColorMap.put(this.getModuleByClass(CevBreaker.class), new Color(255, 68, 183));
-		this.moduleColorMap.put(this.getModuleByClass(AutoBuilder.class), new Color(75, 247, 27));
 		this.moduleColorMap.put(this.getModuleByClass(PenisESP.class), new Color(52, 148, 38));
 		this.moduleColorMap.put(this.getModuleByClass(MountBypass.class), new Color(246, 124, 137));
 		this.moduleColorMap.put(this.getModuleByClass(OldFagDupe.class), new Color(174, 64, 83));
