@@ -5,7 +5,7 @@ Credit list:
 -----------------------------------------------------
 OyVey continued: PopChams <br />
 Banzem: AutoCrystal, Quiver, SilentXP <br />
-Incoming: OldFagDupe, AutoBuilder <br />
+Incoming: OldFagDupe <br />
 Wurst+3: NoEntityTrace <br />
 SexMaster.CC: CrystalModify <br />
 KuroHack: CevBreaker, PistonAura, AutoCity, FastEat <br />
@@ -14,3 +14,4 @@ Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP <br />
 BerryBobos: AntiLog4j, AutoKickBow <br />
+PerryPhobos: ChorusPredict <br />
