@@ -131,6 +131,10 @@ public class ModuleManager
 		this.modules.add(new AutoKickBow());
 	        this.modules.add(new ChorusPredict());
 	        this.modules.add(new AntiPackets());
+	        this.modules.add(new InstantMine());
+		this.modules.add(new AntiPackets());
+		this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(136, 72, 219));
+		this.moduleColorMap.put(this.getModuleByClass(InstantMine.class), new Color(76, 175, 253));
 	        this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
 		this.moduleColorMap.put(this.getModuleByClass(ChorusPredict.class), new Color(43, 165, 216));
 		this.moduleColorMap.put(this.getModuleByClass(AutoKickBow.class), new Color(164, 63, 254));
