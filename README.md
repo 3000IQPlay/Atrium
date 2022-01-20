@@ -10,6 +10,7 @@ Wurst+3: NoEntityTrace <br />
 SexMaster.CC: CrystalModify <br />
 KuroHack: CevBreaker, PistonAura, AutoCity, FastEat <br />
 Quantum: Flatten <br />
+Quantum continued: InstantMine <br />
 Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP <br />
