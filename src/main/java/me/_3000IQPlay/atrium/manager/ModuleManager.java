@@ -126,11 +126,11 @@ public class ModuleManager
 		this.modules.add(new PistonAura());
 		this.modules.add(new PacketEat());
 		this.modules.add(new AntiDDoS());
-		this.modules.add(new AutoCity());
+		    this.modules.add(new AutoCity());
 	    	this.modules.add(new AntiLog4j());
-		this.modules.add(new AutoKickBow());
-	        this.modules.add(new ChorusPredict());
-	        this.modules.add(new AntiPackets());
+		    this.modules.add(new AutoKickBow());
+	            this.modules.add(new ChorusPredict());
+	            this.modules.add(new AntiPackets());
 	        this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
 		this.moduleColorMap.put(this.getModuleByClass(ChorusPredict.class), new Color(43, 165, 216));
 		this.moduleColorMap.put(this.getModuleByClass(AutoKickBow.class), new Color(164, 63, 254));
