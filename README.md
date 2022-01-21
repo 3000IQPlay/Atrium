@@ -16,4 +16,4 @@ DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP <br />
 BerryBobos: AntiLog4j, AutoKickBow <br />
 PerryPhobos: ChorusPredict, AntiPackets, Trajectories <br />
-EBK: Trails <br />
+EBK: Trails, TickShift <br />
