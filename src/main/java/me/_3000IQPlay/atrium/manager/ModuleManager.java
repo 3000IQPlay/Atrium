@@ -133,6 +133,8 @@ public class ModuleManager
 	    this.modules.add(new AntiPackets());
 	    this.modules.add(new InstantMine());
 		this.modules.add(new AntiPackets());
+		this.modules.add(new Trails());
+        this.moduleColorMap.put(this.getModuleByClass(Trails.class), new Color(131, 21, 66));
 		this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(136, 72, 219));
 		this.moduleColorMap.put(this.getModuleByClass(InstantMine.class), new Color(76, 175, 253));
 	    this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
@@ -391,4 +393,3 @@ public class ModuleManager
         return animationModules;
     }
 }
-
