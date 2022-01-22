@@ -1,6 +1,5 @@
 package me._3000IQPlay.atrium.features.modules.render;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.event.events.Render3DEvent;
 import me._3000IQPlay.atrium.features.modules.Module;
