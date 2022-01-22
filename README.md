@@ -4,7 +4,7 @@ This was my first ever java project that im no longer working on. I actually sta
 Credit list:
 -----------------------------------------------------
 OyVey continued: PopChams <br />
-Banzem: AutoCrystal, Quiver, SilentXP <br />
+Banzem: SilentXP <br />
 Incoming: OldFagDupe <br />
 Wurst+3: NoEntityTrace <br />
 SexMaster.CC: CrystalModify <br />
@@ -15,5 +15,5 @@ Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP <br />
 BerryBobos: AntiLog4j, AutoKickBow <br />
-PerryPhobos: ChorusPredict, AntiPackets, Trajectories <br />
+PerryPhobos: ChorusPredict, AntiPackets, Trajectories, AutoCrystal, Quiver <br />
 EBK: Trails, TickShift <br />
