@@ -11,13 +11,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class AntiPing
 extends Module {
-    private static AntiDDoS instance;
+    private static AntiPing instance;
     public final Setting<Boolean> full = this.register(new Setting<Boolean>("Full", false));
     private final Map<String, Setting> servers = new ConcurrentHashMap<String, Setting>();
     public Setting<String> newIP = this.register(new Setting<Object>("NewServer", "Add Server...", v -> this.full.getValue() == false));
     public Setting<Boolean> showServer = this.register(new Setting<Object>("ShowServers", Boolean.valueOf(false), v -> this.full.getValue() == false));
 
-    public AntiDDoS() {
+    public AntiPing() {
         super("AntiPing", "Prevents DDoS attacks via multiplayer list.", Module.Category.PLAYER, false, false, true);
         instance = this;
     }
