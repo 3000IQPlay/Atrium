@@ -127,7 +127,6 @@ public class ModuleManager
 		this.modules.add(new PacketEat());
 		this.modules.add(new AntiPing());
 		this.modules.add(new AutoCity());
-	    this.modules.add(new AntiLog4j());
 		this.modules.add(new AutoKickBow());
 	    this.modules.add(new ChorusPredict());
 	    this.modules.add(new AntiPackets());
@@ -142,7 +141,6 @@ public class ModuleManager
 	    this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
 		this.moduleColorMap.put(this.getModuleByClass(ChorusPredict.class), new Color(43, 165, 216));
 		this.moduleColorMap.put(this.getModuleByClass(AutoKickBow.class), new Color(164, 63, 254));
-		this.moduleColorMap.put(this.getModuleByClass(AntiLog4j.class), new Color(74, 83, 46));
 		this.moduleColorMap.put(this.getModuleByClass(AutoCity.class), new Color(97, 173, 162));
 		this.moduleColorMap.put(this.getModuleByClass(AntiPing.class), new Color(172, 133, 192));
 		this.moduleColorMap.put(this.getModuleByClass(PacketEat.class), new Color(215, 81, 248));
