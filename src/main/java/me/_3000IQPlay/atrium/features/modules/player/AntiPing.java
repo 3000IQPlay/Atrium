@@ -22,9 +22,9 @@ extends Module {
         instance = this;
     }
 
-    public static AntiDDoS getInstance() {
+    public static AntiPing getInstance() {
         if (instance == null) {
-            instance = new AntiDDoS();
+            instance = new AntiPing();
         }
         return instance;
     }
