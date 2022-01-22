@@ -9,7 +9,7 @@ import me._3000IQPlay.atrium.features.modules.Module;
 import me._3000IQPlay.atrium.features.setting.Setting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class AntiDDoS
+public class AntiPing
 extends Module {
     private static AntiDDoS instance;
     public final Setting<Boolean> full = this.register(new Setting<Boolean>("Full", false));
@@ -18,7 +18,7 @@ extends Module {
     public Setting<Boolean> showServer = this.register(new Setting<Object>("ShowServers", Boolean.valueOf(false), v -> this.full.getValue() == false));
 
     public AntiDDoS() {
-        super("AntiDDoS", "Prevents DDoS attacks via multiplayer list.", Module.Category.PLAYER, false, false, true);
+        super("AntiPing", "Prevents DDoS attacks via multiplayer list.", Module.Category.PLAYER, false, false, true);
         instance = this;
     }
 
@@ -38,7 +38,7 @@ extends Module {
             if (event.getSetting().equals(this.newIP) && !this.shouldntPing(this.newIP.getPlannedValue()) && !event.getSetting().getPlannedValue().equals(event.getSetting().getDefaultValue())) {
                 Setting setting = this.register(new Setting<Boolean>(this.newIP.getPlannedValue(), Boolean.valueOf(true), v -> this.showServer.getValue() != false && this.full.getValue() == false));
                 this.registerServer(setting);
-                Command.sendMessage("<AntiDDoS> Added new Server: " + this.newIP.getPlannedValue());
+                Command.sendMessage("<AntiPing> Added new Server: " + this.newIP.getPlannedValue());
                 event.setCanceled(true);
             } else {
                 Setting setting = event.getSetting();
