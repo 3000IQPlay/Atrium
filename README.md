@@ -4,7 +4,6 @@ This was my first ever java project that im no longer working on. I actually sta
 Credit list:
 -----------------------------------------------------
 OyVey continued: PopChams <br />
-Banzem: SilentXP <br />
 Incoming: OldFagDupe <br />
 Wurst+3: NoEntityTrace <br />
 SexMaster.CC: CrystalModify <br />
