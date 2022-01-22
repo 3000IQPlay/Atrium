@@ -13,6 +13,6 @@ Quantum continued: InstantMine <br />
 Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP <br />
-BerryBobos: AntiLog4j, AutoKickBow <br />
-PerryPhobos: AutoCrystal Renders, Quiver, ChorusPredict, AntiPackets, Trajectories <br />
+BerryBobos: AutoKickBow <br />
+PerryPhobos: AutoCrystal Renders, Quiver, AntiPackets, Trajectories <br />
 EBK: Trails, TickShift <br />
