@@ -14,5 +14,5 @@ Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP <br />
 BerryBobos: AntiLog4j, AutoKickBow <br />
-PerryPhobos: AutoCrystal renders, Quiver, ChorusPredict, AntiPackets, Trajectories <br />
+PerryPhobos: AutoCrystal Renders, Quiver, ChorusPredict, AntiPackets, Trajectories <br />
 EBK: Trails, TickShift <br />
