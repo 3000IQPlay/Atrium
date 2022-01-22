@@ -16,3 +16,4 @@ Sushi.CC v2: PenisESP <br />
 BerryBobos: AutoKickBow <br />
 PerryPhobos: AutoCrystal Renders, Quiver, AntiPackets, Trajectories <br />
 EBK: Trails, TickShift <br />
+OctoHack: ChorusPostpone, Clip <br />
