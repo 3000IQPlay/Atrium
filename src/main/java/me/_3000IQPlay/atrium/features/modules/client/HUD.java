@@ -198,7 +198,7 @@ public class HUD
         final String grayString = this.grayNess.getValue() ? String.valueOf(ChatFormatting.GRAY) : "";
         switch (this.watermark.getValue()) {
             case ATRIUM: {
-                this.renderer.drawString("Atrium" + (this.modeVer.getValue() ? Atrium.MODVER : ""), 2.0f, 2.0f, (this.rolling.getValue() && this.rainbow.getValue()) ? this.colorMap.get(2) : this.color, true);
+                this.renderer.drawString("Atrium " + (this.modeVer.getValue() ? Atrium.MODVER : ""), 2.0f, 2.0f, (this.rolling.getValue() && this.rainbow.getValue()) ? this.colorMap.get(2) : this.color, true);
                 break;
             }
         }
