@@ -44,6 +44,11 @@ public class ClickGui
     public Setting<Integer> particlered = this.register(new Setting<Integer>("ParticleRed", 255, 0, 255, v -> this.particles.getValue()));
     public Setting<Integer> particlegreen = this.register(new Setting<Integer>("ParticleGreen", 255, 0, 255, v -> this.particles.getValue()));
     public Setting<Integer> particleblue = this.register(new Setting<Integer>("ParticleBlue", 255, 0, 255, v -> this.particles.getValue()));
+	public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true));
+    public Setting<Integer> frameRed = this.register(new Setting<Integer>("FrameRed", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
+    public Setting<Integer> frameGreen = this.register(new Setting<Integer>("FrameGreen", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
+    public Setting<Integer> frameBlue = this.register(new Setting<Integer>("FrameBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
+    public Setting<Integer> frameAlpha = this.register(new Setting<Integer>("FrameAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
 
     public ClickGui() {
         super("ClickGui", "Opens the ClickGui", Module.Category.CLIENT, true, false, false);
