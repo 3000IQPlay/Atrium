@@ -1,4 +1,4 @@
-# Atrium-Phobos-Edition
+# Atrium Client
 This was my first ever java project that im no longer working on. I actually started making this for fun when i didnt even had any knowlage about java. Im making this project public because why not and also i will probably start working on "Atrium Legit Base" after i will had bigger java knowlage. (Il might make some changes) <br />
 
 If i forgot something sry
@@ -14,7 +14,7 @@ Quantum: Flatten <br />
 Quantum continued: InstantMine <br />
 Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
-Sushi.CC v2: PenisESP <br />
+Sushi.CC v2: PenisESP, FastProjectiles <br />
 BerryBobos: AutoKickBow <br />
 PerryPhobos: AutoCrystal Renders, Quiver, AntiPackets, Trajectories <br />
 EBK: Trails, TickShift <br />
