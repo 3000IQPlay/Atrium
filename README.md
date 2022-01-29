@@ -9,7 +9,7 @@ OyVey continued: PopChams <br />
 Incoming: OldFagDupe <br />
 Wurst+3: NoEntityTrace <br />
 SexMaster.CC: CrystalModify <br />
-KuroHack: CevBreaker, PistonAura, AutoCity, FastEat, HitMarkers <br />
+KuroHack: CevBreaker, PistonAura, AutoCity, FastEat <br />
 Quantum: Flatten <br />
 Quantum continued: InstantMine <br />
 Legacy: BowAim <br />
