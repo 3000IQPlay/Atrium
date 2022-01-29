@@ -23,10 +23,10 @@ public class Media
     }
 
     public static String getPlayerName() {
-        if (Media.fullNullCheck() || !ServerModule.getInstance().isConnected()) {
+        if (Media.fullNullCheck() || !PingBypass.getInstance().isConnected()) {
             return Util.mc.getSession().getUsername();
         }
-        String name = ServerModule.getInstance().getPlayerName();
+        String name = PingBypass.getInstance().getPlayerName();
         if (name == null || name.isEmpty()) {
             return Util.mc.getSession().getUsername();
         }
