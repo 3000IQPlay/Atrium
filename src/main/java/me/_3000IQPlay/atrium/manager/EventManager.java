@@ -6,7 +6,7 @@ import me._3000IQPlay.atrium.event.events.*;
 import me._3000IQPlay.atrium.features.Feature;
 import me._3000IQPlay.atrium.features.command.Command;
 import me._3000IQPlay.atrium.features.modules.client.Managers;
-import me._3000IQPlay.atrium.features.modules.client.ServerModule;
+import me._3000IQPlay.atrium.features.modules.client.PingBypass;
 import me._3000IQPlay.atrium.features.modules.combat.AutoCrystal;
 import me._3000IQPlay.atrium.util.GLUProjection;
 import me._3000IQPlay.atrium.util.Timer;
@@ -73,8 +73,8 @@ public class EventManager
 
     @SubscribeEvent
     public void onSettingChange(ClientEvent event) {
-        if (event.getStage() == 2 && mc.getConnection() != null && ServerModule.getInstance().isConnected() && EventManager.mc.world != null) {
-            String command = "@Server" + ServerModule.getInstance().getServerPrefix() + "module " + event.getSetting().getFeature().getName() + " set " + event.getSetting().getName() + " " + event.getSetting().getPlannedValue().toString();
+        if (event.getStage() == 2 && mc.getConnection() != null && PingBypass.getInstance().isConnected() && EventManager.mc.world != null) {
+            String command = "@Server" + PingBypass.getInstance().getServerPrefix() + "module " + event.getSetting().getFeature().getName() + " set " + event.getSetting().getName() + " " + event.getSetting().getPlannedValue().toString();
             CPacketChatMessage cPacketChatMessage = new CPacketChatMessage(command);
         }
     }
