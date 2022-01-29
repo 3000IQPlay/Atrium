@@ -24,14 +24,14 @@ public class HoleESP
     public Setting<Boolean> gradientOutline = this.register(new Setting<Object>("GradientOutline", Boolean.valueOf(false), v -> this.outline.getValue()));
     public Setting<Boolean> invertGradientOutline = this.register(new Setting<Object>("InvertGradientOutline", Boolean.valueOf(false), v -> this.gradientOutline.getValue()));
     public Setting<Double> height = this.register(new Setting<Double>("Height", 0.0, -2.0, 2.0));
-    public Setting<Boolean> safeColor = this.register(new Setting<Boolean>("SafeColor", false));
+    public Setting<Boolean> safeColor = this.register(new Setting<Boolean>("SafeColor", true));
     public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(false), v -> this.outline.getValue()));
     private final Setting<Integer> holes = this.register(new Setting<Integer>("Holes", 3, 1, 500));
     private final Setting<Integer> minPulseAlpha = this.register(new Setting<Object>("MinPulse", Integer.valueOf(10), Integer.valueOf(0), Integer.valueOf(255), v -> this.pulseAlpha.getValue()));
     private final Setting<Integer> maxPulseAlpha = this.register(new Setting<Object>("MaxPulse", Integer.valueOf(40), Integer.valueOf(0), Integer.valueOf(255), v -> this.pulseAlpha.getValue()));
     private final Setting<Integer> pulseSpeed = this.register(new Setting<Object>("PulseSpeed", Integer.valueOf(10), Integer.valueOf(1), Integer.valueOf(50), v -> this.pulseAlpha.getValue()));
-    private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 0, 0, 255));
-    private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 255, 0, 255));
+    private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 255, 0, 255));
+    private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 0, 0, 255));
     private final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 0, 0, 255));
     private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
     private final Setting<Integer> boxAlpha = this.register(new Setting<Object>("BoxAlpha", Integer.valueOf(125), Integer.valueOf(0), Integer.valueOf(255), v -> this.box.getValue()));
