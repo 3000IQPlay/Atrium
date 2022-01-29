@@ -255,7 +255,7 @@ public class Offhand
     @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {
         SPacketSetSlot packet;
-        if (ServerModule.getInstance().isConnected() && event.getPacket() instanceof SPacketSetSlot && (packet = event.getPacket()).getSlot() == -1 && packet.getWindowId() != -1) {
+        if (PingBypass.getInstance().isConnected() && event.getPacket() instanceof SPacketSetSlot && (packet = event.getPacket()).getSlot() == -1 && packet.getWindowId() != -1) {
             ((IContainer) Offhand.mc.player.openContainer).setTransactionID((short) packet.getWindowId());
             ((ISPacketSetSlot) packet).setWindowId(-1);
             this.serverTimer.reset();
