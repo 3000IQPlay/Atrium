@@ -134,8 +134,6 @@ public class ModuleManager
 		this.modules.add(new Clip());
 		this.modules.add(new Trails());
 		this.modules.add(new TickShift());
-		this.modules.add(new HitMarkers());
-		this.moduleColorMap.put(this.getModuleByClass(HitMarkers.class), new Color(73, 55, 210));
 		this.moduleColorMap.put(this.getModuleByClass(TickShift.class), new Color(171, 18, 26));
         this.moduleColorMap.put(this.getModuleByClass(Trails.class), new Color(131, 21, 66));
 		this.moduleColorMap.put(this.getModuleByClass(Clip.class), new Color(136, 72, 219));
