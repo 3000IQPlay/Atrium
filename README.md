@@ -3,7 +3,7 @@ This was my first ever java project that im no longer working on. I actually sta
 
 If i forgot something sry
 
-Credit list:
+Modules list:
 -----------------------------------------------------
 OyVey continued: PopChams <br />
 Incoming: OldFagDupe <br />
