@@ -31,7 +31,7 @@ public class ModuleTools extends Module {
     }
 
     public enum PopNotifier{
-        ATRIUM,
+        PHOBOS,
         FUTURE,
         DOTGOD,
         NONE
