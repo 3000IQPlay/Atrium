@@ -4,7 +4,7 @@ import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.event.events.UpdateWalkingPlayerEvent;
 import me._3000IQPlay.atrium.features.modules.Module;
 import me._3000IQPlay.atrium.features.modules.client.ClickGui;
-import me._3000IQPlay.atrium.features.modules.client.ServerModule;
+import me._3000IQPlay.atrium.features.modules.client.PingBypass;
 import me._3000IQPlay.atrium.features.modules.player.Freecam;
 import me._3000IQPlay.atrium.features.setting.Bind;
 import me._3000IQPlay.atrium.features.setting.Setting;
@@ -82,7 +82,7 @@ public class HoleFiller
     }
 
     private boolean shouldServer() {
-        return ServerModule.getInstance().isConnected() && this.server.getValue() != false;
+        return PingBypass.getInstance().isConnected() && this.server.getValue() != false;
     }
 
     @Override
@@ -299,4 +299,3 @@ public class HoleFiller
 
     }
 }
-
