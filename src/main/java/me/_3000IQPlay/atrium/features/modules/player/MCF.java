@@ -5,7 +5,7 @@ import me._3000IQPlay.atrium.features.command.Command;
 import me._3000IQPlay.atrium.features.gui.AtriumGui;
 import me._3000IQPlay.atrium.features.modules.Module;
 import me._3000IQPlay.atrium.features.modules.client.ClickGui;
-import me._3000IQPlay.atrium.features.modules.client.ServerModule;
+import me._3000IQPlay.atrium.features.modules.client.PingBypass;
 import me._3000IQPlay.atrium.features.setting.Bind;
 import me._3000IQPlay.atrium.features.setting.Setting;
 import net.minecraft.entity.Entity;
@@ -56,14 +56,14 @@ public class MCF
             if (Atrium.friendManager.isFriend(entity.getName())) {
                 Atrium.friendManager.removeFriend(entity.getName());
                 Command.sendMessage("\u00a7c" + entity.getName() + "\u00a7r" + " unfriended.");
-                if (this.server.getValue().booleanValue() && ServerModule.getInstance().isConnected()) {
+                if (this.server.getValue().booleanValue() && PingBypass.getInstance().isConnected()) {
                     MCF.mc.player.connection.sendPacket(new CPacketChatMessage("@Serverprefix" + ClickGui.getInstance().prefix.getValue()));
                     MCF.mc.player.connection.sendPacket(new CPacketChatMessage("@Server" + ClickGui.getInstance().prefix.getValue() + "friend del " + entity.getName()));
                 }
             } else {
                 Atrium.friendManager.addFriend(entity.getName());
                 Command.sendMessage("\u00a7b" + entity.getName() + "\u00a7r" + " friended.");
-                if (this.server.getValue().booleanValue() && ServerModule.getInstance().isConnected()) {
+                if (this.server.getValue().booleanValue() && PingBypass.getInstance().isConnected()) {
                     MCF.mc.player.connection.sendPacket(new CPacketChatMessage("@Serverprefix" + ClickGui.getInstance().prefix.getValue()));
                     MCF.mc.player.connection.sendPacket(new CPacketChatMessage("@Server" + ClickGui.getInstance().prefix.getValue() + "friend add " + entity.getName()));
                 }
