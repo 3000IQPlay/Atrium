@@ -8,7 +8,7 @@ public class ModuleTools extends Module {
     private static ModuleTools INSTANCE;
 
     public Setting<Notifier> notifier = register(new Setting("ModuleNotifier", Notifier.ATRIUM));
-    public Setting<PopNotifier> popNotifier = register(new Setting("PopNotifier", PopNotifier.ATRIUM));
+    public Setting<PopNotifier> popNotifier = register(new Setting("PopNotifier", PopNotifier.NONE));
 
     public ModuleTools() {
         super("ModuleTools", "Change settings", Category.CLIENT, true, false, false);
