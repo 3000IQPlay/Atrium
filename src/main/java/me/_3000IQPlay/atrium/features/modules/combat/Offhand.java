@@ -4,7 +4,7 @@ import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.event.events.PacketEvent;
 import me._3000IQPlay.atrium.event.events.ProcessRightClickBlockEvent;
 import me._3000IQPlay.atrium.features.modules.Module;
-import me._3000IQPlay.atrium.features.modules.client.ServerModule;
+import me._3000IQPlay.atrium.features.modules.client.PingBypass;
 import me._3000IQPlay.atrium.features.setting.Bind;
 import me._3000IQPlay.atrium.features.setting.EnumConverter;
 import me._3000IQPlay.atrium.features.setting.Setting;
