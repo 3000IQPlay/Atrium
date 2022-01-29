@@ -291,7 +291,7 @@ public class HUD
                 renderer7.drawString(text11, x7, (float) (n7 - k), (this.rolling.getValue() && this.rainbow.getValue()) ? this.colorMap.get(height - k) : this.color, true);
             }
             final String fpsText = grayString + "FPS " + ChatFormatting.WHITE + Minecraft.debugFPS;
-            final String text = grayString + "Ping " + ChatFormatting.WHITE + (ServerModule.getInstance().isConnected() ? ServerModule.getInstance().getServerPing() : Atrium.serverManager.getPing()) + (this.MS.getValue() ? "ms" : "");
+            final String text = grayString + "Ping " + ChatFormatting.WHITE + (PingBypass.getInstance().isConnected() ? PingBypass.getInstance().getServerPing() : Atrium.serverManager.getPing()) + (this.MS.getValue() ? "ms" : "");
             if (this.renderer.getStringWidth(text) > this.renderer.getStringWidth(fpsText)) {
                 if (this.ping.getValue()) {
                     final TextManager renderer8 = this.renderer;
