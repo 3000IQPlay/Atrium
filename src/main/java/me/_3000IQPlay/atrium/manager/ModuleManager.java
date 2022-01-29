@@ -87,7 +87,7 @@ public class ModuleManager
         this.modules.add(new Components());
         this.modules.add(new Capes());
         this.modules.add(new Colors());
-        this.modules.add(new ServerModule());
+        this.modules.add(new PingBypass());
         this.modules.add(new Media());
         this.modules.add(new IRC());
 		this.modules.add(new PopChams());
@@ -232,7 +232,7 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(HUD.class), new Color(110, 26, 135));
         this.moduleColorMap.put(this.getModuleByClass(Managers.class), new Color(26, 90, 135));
         this.moduleColorMap.put(this.getModuleByClass(Notifications.class), new Color(170, 153, 255));
-        this.moduleColorMap.put(this.getModuleByClass(ServerModule.class), new Color(60, 110, 175));
+        this.moduleColorMap.put(this.getModuleByClass(PingBypass.class), new Color(60, 110, 175));
         this.moduleColorMap.put(this.getModuleByClass(Media.class), new Color(138, 45, 13));
         for (Module module : this.modules) {
             module.animation.start();
