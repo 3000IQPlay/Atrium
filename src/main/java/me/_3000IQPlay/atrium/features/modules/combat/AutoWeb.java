@@ -5,7 +5,7 @@ import me._3000IQPlay.atrium.event.events.UpdateWalkingPlayerEvent;
 import me._3000IQPlay.atrium.features.command.Command;
 import me._3000IQPlay.atrium.features.modules.Module;
 import me._3000IQPlay.atrium.features.modules.client.ClickGui;
-import me._3000IQPlay.atrium.features.modules.client.ServerModule;
+import me._3000IQPlay.atrium.features.modules.client.PingBypass;
 import me._3000IQPlay.atrium.features.setting.Setting;
 import me._3000IQPlay.atrium.util.*;
 import net.minecraft.block.BlockWeb;
@@ -57,7 +57,7 @@ public class AutoWeb
     }
 
     private boolean shouldServer() {
-        return ServerModule.getInstance().isConnected() && this.server.getValue() != false;
+        return PingBypass.getInstance().isConnected() && this.server.getValue() != false;
     }
 
     @Override
