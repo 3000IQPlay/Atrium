@@ -72,7 +72,7 @@ public class Component
             RenderUtil.drawRect(this.x, (float)this.y + 11.0f, this.x + this.width, this.y + this.height - 6, ClickGui.getInstance().colorSync.getValue() != false ? Colors.INSTANCE.getCurrentColor().getRGB() : ColorUtil.toARGB(ClickGui.getInstance().frameRed.getValue(), ClickGui.getInstance().frameGreen.getValue(), ClickGui.getInstance().frameBlue.getValue(), ClickGui.getInstance().frameAlpha.getValue()));
         }
         if (this.open) {
-            RenderUtil.drawRect(this.x, (float) this.y + 12.5f, this.x + this.width, (float) (this.y + this.height) + totalItemHeight, 0x77000000);
+            RenderUtil.drawRect(this.x, (float)this.y + 12.5f, this.x + this.width, (float)(this.y + this.height) + totalItemHeight, ColorUtil.toARGB(10, 10, 10, ClickGui.getInstance().backgroundAlpha.getValue()));
             if (ClickGui.getInstance().outline.getValue().booleanValue()) {
                 if (ClickGui.getInstance().rainbowRolling.getValue().booleanValue()) {
                     GlStateManager.disableTexture2D();
