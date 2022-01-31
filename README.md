@@ -15,7 +15,6 @@ Quantum continued: InstantMine <br />
 Legacy: BowAim <br />
 DotGod.CC: FakePlayer <br />
 Sushi.CC v2: PenisESP, FastProjectiles <br />
-BerryBobos: AutoKickBow <br />
 PerryPhobos: AutoCrystal Renders, Quiver, AntiPackets, Trajectories <br />
 EBK: Trails, TickShift <br />
 OctoHack: ChorusPostpone, Clip <br />
