@@ -42,8 +42,8 @@ public class EventManager
     private final Timer timer = new Timer();
     private final Timer logoutTimer = new Timer();
     private final Timer switchTimer = new Timer();
-    private boolean keyTimeout;
     private final AtomicBoolean tickOngoing = new AtomicBoolean(false);
+    private boolean keyTimeout;
 
     public void init() {
         MinecraftForge.EVENT_BUS.register(this);

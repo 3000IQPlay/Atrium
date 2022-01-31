@@ -1,6 +1,7 @@
 package me._3000IQPlay.atrium.features.modules.movement;
 
 import java.util.ArrayList;
+
 import me._3000IQPlay.atrium.features.setting.Setting;
 import me._3000IQPlay.atrium.features.modules.Module;
 import net.minecraft.init.Blocks;
@@ -9,12 +10,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Anchor
-extends Module {
+        extends Module {
+    public static boolean AnchorING;
+    private final ArrayList<BlockPos> holes = new ArrayList();
     public Setting<Boolean> pull = this.register(new Setting<Boolean>("Pull", true));
     public Setting<Integer> pitch = this.register(new Setting<Integer>("Pitch", 60, 0, 90));
-    private final ArrayList<BlockPos> holes = new ArrayList();
     int holeblocks;
-    public static boolean AnchorING;
     private Vec3d Center = Vec3d.ZERO;
 
     public Anchor() {
@@ -69,7 +70,7 @@ extends Module {
         if (Anchor.mc.player.posY < 0.0) {
             return;
         }
-        if (Anchor.mc.player.rotationPitch >= (float)this.pitch.getValue().intValue()) {
+        if (Anchor.mc.player.rotationPitch >= (float) this.pitch.getValue().intValue()) {
             if (this.isBlockHole(this.getPlayerPos().down(1)) || this.isBlockHole(this.getPlayerPos().down(2)) || this.isBlockHole(this.getPlayerPos().down(3)) || this.isBlockHole(this.getPlayerPos().down(4))) {
                 AnchorING = true;
                 if (!this.pull.getValue().booleanValue()) {

@@ -13,14 +13,14 @@ import java.util.Objects;
 
 public class Criticals
         extends Module {
-    public Setting<Boolean> noDesync = this.register(new Setting<Boolean>("NoDesync", true));
-    public Setting<Boolean> cancelFirst = this.register(new Setting<Boolean>("CancelFirst32k", true));
-    public Setting<Integer> delay32k = this.register(new Setting<Object>("32kDelay", Integer.valueOf(25), Integer.valueOf(0), Integer.valueOf(500), v -> this.cancelFirst.getValue()));
     private final Setting<Mode> mode = this.register(new Setting<Mode>("Mode", Mode.PACKET));
     private final Setting<Integer> packets = this.register(new Setting<Object>("Packets", 2, 1, 5, v -> this.mode.getValue() == Mode.PACKET, "Amount of packets you want to send."));
     private final Setting<Integer> desyncDelay = this.register(new Setting<Object>("DesyncDelay", 10, 0, 500, v -> this.mode.getValue() == Mode.PACKET, "Amount of packets you want to send."));
     private final Timer timer = new Timer();
     private final Timer timer32k = new Timer();
+    public Setting<Boolean> noDesync = this.register(new Setting<Boolean>("NoDesync", true));
+    public Setting<Boolean> cancelFirst = this.register(new Setting<Boolean>("CancelFirst32k", true));
+    public Setting<Integer> delay32k = this.register(new Setting<Object>("32kDelay", Integer.valueOf(25), Integer.valueOf(0), Integer.valueOf(500), v -> this.cancelFirst.getValue()));
     private boolean firstCanceled = false;
     private boolean resetTimer = false;
 

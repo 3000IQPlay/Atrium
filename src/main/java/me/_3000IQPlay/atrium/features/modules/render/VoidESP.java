@@ -16,21 +16,21 @@ public class VoidESP
         extends Module {
     private final Setting<Float> radius = this.register(new Setting<Float>("Radius", Float.valueOf(8.0f), Float.valueOf(0.0f), Float.valueOf(50.0f)));
     private final Timer timer = new Timer();
-    public Setting<Boolean> air = this.register(new Setting<Boolean>("OnlyAir", true));
-    public Setting<Boolean> noEnd = this.register(new Setting<Boolean>("NoEnd", true));
-    public Setting<Boolean> box = this.register(new Setting<Boolean>("Box", true));
-    public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", true));
-    public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
-    public Setting<Double> height = this.register(new Setting<Double>("Height", 0.0, -2.0, 2.0));
-    public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(false), v -> this.outline.getValue()));
     private final Setting<Integer> updates = this.register(new Setting<Integer>("Updates", 500, 0, 1000));
     private final Setting<Integer> voidCap = this.register(new Setting<Integer>("VoidCap", 500, 0, 1000));
     private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 0, 0, 255));
     private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 255, 0, 255));
     private final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
     private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+    public Setting<Boolean> air = this.register(new Setting<Boolean>("OnlyAir", true));
+    public Setting<Boolean> noEnd = this.register(new Setting<Boolean>("NoEnd", true));
+    public Setting<Boolean> box = this.register(new Setting<Boolean>("Box", true));
     private final Setting<Integer> boxAlpha = this.register(new Setting<Object>("BoxAlpha", Integer.valueOf(125), Integer.valueOf(0), Integer.valueOf(255), v -> this.box.getValue()));
+    public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", true));
     private final Setting<Float> lineWidth = this.register(new Setting<Object>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f), v -> this.outline.getValue()));
+    public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
+    public Setting<Double> height = this.register(new Setting<Double>("Height", 0.0, -2.0, 2.0));
+    public Setting<Boolean> customOutline = this.register(new Setting<Object>("CustomLine", Boolean.valueOf(false), v -> this.outline.getValue()));
     private final Setting<Integer> cRed = this.register(new Setting<Object>("OL-Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
     private final Setting<Integer> cGreen = this.register(new Setting<Object>("OL-Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));
     private final Setting<Integer> cBlue = this.register(new Setting<Object>("OL-Blue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.customOutline.getValue() != false && this.outline.getValue() != false));

@@ -3,6 +3,7 @@ package me._3000IQPlay.atrium.features.modules.combat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
 import me._3000IQPlay.atrium.features.modules.Module;
 import me._3000IQPlay.atrium.features.setting.Setting;
 import me._3000IQPlay.atrium.util.BlockUtil;
@@ -77,7 +78,7 @@ public class CevBreaker
         }
         if (this._target == null) {
             if (this.targetType.getValue() == type.NEAREST) {
-                this._target = CevBreaker.mc.world.playerEntities.stream().filter(p -> p.getEntityId() != CevBreaker.mc.player.getEntityId()).min(Comparator.comparing(p -> Float.valueOf(p.getDistance((Entity)CevBreaker.mc.player)))).orElse(null);
+                this._target = CevBreaker.mc.world.playerEntities.stream().filter(p -> p.getEntityId() != CevBreaker.mc.player.getEntityId()).min(Comparator.comparing(p -> Float.valueOf(p.getDistance((Entity) CevBreaker.mc.player)))).orElse(null);
             }
             if (this._target == null) {
                 this.disable();
@@ -111,8 +112,8 @@ public class CevBreaker
                 CevBreaker.mc.playerController.onPlayerDamageBlock(this.breakPos, EnumFacing.DOWN);
             } else {
                 CevBreaker.mc.player.swingArm(EnumHand.MAIN_HAND);
-                CevBreaker.mc.player.connection.sendPacket((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, this.breakPos, EnumFacing.DOWN));
-                CevBreaker.mc.player.connection.sendPacket((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, this.breakPos, EnumFacing.DOWN));
+                CevBreaker.mc.player.connection.sendPacket((Packet) new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, this.breakPos, EnumFacing.DOWN));
+                CevBreaker.mc.player.connection.sendPacket((Packet) new CPacketPlayerDigging(CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, this.breakPos, EnumFacing.DOWN));
             }
             this.breaking = true;
         } else if (this.breaking && !this.broke) {
@@ -125,7 +126,7 @@ public class CevBreaker
                 return;
             }
             this.timer = 0;
-            Entity bcrystal = CevBreaker.mc.world.loadedEntityList.stream().filter(e -> e instanceof EntityEnderCrystal).min(Comparator.comparing(c -> Float.valueOf(c.getDistance((Entity)this._target)))).orElse(null);
+            Entity bcrystal = CevBreaker.mc.world.loadedEntityList.stream().filter(e -> e instanceof EntityEnderCrystal).min(Comparator.comparing(c -> Float.valueOf(c.getDistance((Entity) this._target)))).orElse(null);
             if (bcrystal == null) {
                 if (this.attempts < this.hitDelay.getValue()) {
                     ++this.attempts;
@@ -141,7 +142,7 @@ public class CevBreaker
                 this.broke = false;
                 this.attempts = 0;
             } else {
-                CevBreaker.mc.player.connection.sendPacket((Packet)new CPacketUseEntity(bcrystal));
+                CevBreaker.mc.player.connection.sendPacket((Packet) new CPacketUseEntity(bcrystal));
                 this.placedCrystal = false;
                 this.placeList.add(this.breakPos);
                 this.breaking = false;
@@ -166,7 +167,7 @@ public class CevBreaker
                 CevBreaker.mc.player.inventory.currentItem = crystal;
             }
             CevBreaker.mc.playerController.updateController();
-            CevBreaker.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItemOnBlock(this.b_crystal, EnumFacing.UP, CevBreaker.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
+            CevBreaker.mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(this.b_crystal, EnumFacing.UP, CevBreaker.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
             CevBreaker.mc.player.inventory.currentItem = oldslot;
             this.placedCrystal = true;
         }
@@ -182,12 +183,12 @@ public class CevBreaker
         }
         ArrayList<BlockPos> posList = new ArrayList<BlockPos>();
         for (int i = 0; i < offset.length; ++i) {
-            BlockPos offsetPos = tpos.add((Vec3i)offset[i]);
+            BlockPos offsetPos = tpos.add((Vec3i) offset[i]);
             Block block = this.getBlock(offsetPos);
             if (block == Blocks.AIR || block instanceof BlockLiquid) continue;
             posList.add(offsetPos);
         }
-        BlockPos base = posList.stream().max(Comparator.comparing(b -> this._target.getDistance((double)b.getX(), (double)b.getY(), (double)b.getZ()))).orElse(null);
+        BlockPos base = posList.stream().max(Comparator.comparing(b -> this._target.getDistance((double) b.getX(), (double) b.getY(), (double) b.getZ()))).orElse(null);
         if (base == null) {
             return;
         }
@@ -201,7 +202,8 @@ public class CevBreaker
 
     private int findMaterials(Block b) {
         for (int i = 0; i < 9; ++i) {
-            if (!(CevBreaker.mc.player.inventory.getStackInSlot(i).getItem() instanceof ItemBlock) || ((ItemBlock)CevBreaker.mc.player.inventory.getStackInSlot(i).getItem()).getBlock() != b) continue;
+            if (!(CevBreaker.mc.player.inventory.getStackInSlot(i).getItem() instanceof ItemBlock) || ((ItemBlock) CevBreaker.mc.player.inventory.getStackInSlot(i).getItem()).getBlock() != b)
+                continue;
             return i;
         }
         return -1;

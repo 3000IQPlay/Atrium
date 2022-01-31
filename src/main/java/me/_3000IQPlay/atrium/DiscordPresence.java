@@ -8,9 +8,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 
 public class DiscordPresence {
-    public static DiscordRichPresence presence;
     private static final DiscordRPC rpc;
+    public static DiscordRichPresence presence;
     private static Thread thread;
+
+    static {
+        rpc = DiscordRPC.INSTANCE;
+        presence = new DiscordRichPresence();
+    }
 
     public static void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers();
@@ -29,8 +34,8 @@ public class DiscordPresence {
                 rpc.Discord_UpdatePresence(presence);
                 try {
                     Thread.sleep(2000L);
+                } catch (InterruptedException interruptedException) {
                 }
-                catch (InterruptedException interruptedException) {}
             }
         }, "RPC-Callback-Handler");
         thread.start();
@@ -41,10 +46,5 @@ public class DiscordPresence {
             thread.interrupt();
         }
         rpc.Discord_Shutdown();
-    }
-
-    static {
-        rpc = DiscordRPC.INSTANCE;
-        presence = new DiscordRichPresence();
     }
 }

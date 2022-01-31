@@ -17,21 +17,21 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value={RenderItem.class})
+@Mixin(value = {RenderItem.class})
 public class MixinRenderItem {
     @Shadow
     private void renderModel(IBakedModel model, int color, ItemStack stack) {
     }
 
-    @Inject(method={"renderItemModel"}, at={@At(value="INVOKE", target="Lnet/minecraft/client/renderer/RenderItem;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/renderer/block/model/IBakedModel;)V", shift=At.Shift.BEFORE)})
+    @Inject(method = {"renderItemModel"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderItem;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/renderer/block/model/IBakedModel;)V", shift = At.Shift.BEFORE)})
     private void renderItemModel(ItemStack stack, IBakedModel bakedModel, ItemCameraTransforms.TransformType transform, boolean leftHanded, CallbackInfo ci) {
         RenderItemEvent event = new RenderItemEvent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         if (ViewModel.getInstance().isEnabled()) {
             if (!leftHanded) {
-                GlStateManager.scale((double)event.getMainHandScaleX(), (double)event.getMainHandScaleY(), (double)event.getMainHandScaleZ());
+                GlStateManager.scale((double) event.getMainHandScaleX(), (double) event.getMainHandScaleY(), (double) event.getMainHandScaleZ());
             } else {
-                GlStateManager.scale((double)event.getOffHandScaleX(), (double)event.getOffHandScaleY(), (double)event.getOffHandScaleZ());
+                GlStateManager.scale((double) event.getOffHandScaleX(), (double) event.getOffHandScaleY(), (double) event.getOffHandScaleZ());
             }
         }
     }

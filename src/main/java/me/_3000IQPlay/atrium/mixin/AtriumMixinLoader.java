@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixins;
 import java.util.Map;
 
 public class AtriumMixinLoader
-implements IFMLLoadingPlugin {
+        implements IFMLLoadingPlugin {
     private static boolean isObfuscatedEnvironment = false;
 
     public AtriumMixinLoader() {
@@ -33,7 +33,7 @@ implements IFMLLoadingPlugin {
     }
 
     public void injectData(Map<String, Object> data) {
-        isObfuscatedEnvironment = (Boolean)data.get("runtimeDeobfuscationEnabled");
+        isObfuscatedEnvironment = (Boolean) data.get("runtimeDeobfuscationEnabled");
     }
 
     public String getAccessTransformerClass() {

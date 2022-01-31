@@ -23,8 +23,8 @@ import org.lwjgl.input.Keyboard;
 
 public class NoSlowDown
         extends Module {
-    private static NoSlowDown INSTANCE = new NoSlowDown();
     private static final KeyBinding[] keys = new KeyBinding[]{NoSlowDown.mc.gameSettings.keyBindForward, NoSlowDown.mc.gameSettings.keyBindBack, NoSlowDown.mc.gameSettings.keyBindLeft, NoSlowDown.mc.gameSettings.keyBindRight, NoSlowDown.mc.gameSettings.keyBindJump, NoSlowDown.mc.gameSettings.keyBindSprint};
+    private static NoSlowDown INSTANCE = new NoSlowDown();
     public final Setting<Double> webHorizontalFactor = this.register(new Setting<Double>("WebHSpeed", 2.0, 0.0, 100.0));
     public final Setting<Double> webVerticalFactor = this.register(new Setting<Double>("WebVSpeed", 2.0, 0.0, 100.0));
     public Setting<Boolean> guiMove = this.register(new Setting<Boolean>("GuiMove", true));

@@ -24,13 +24,13 @@ public class ModuleTools extends Module {
     }
 
 
-    public enum Notifier{
+    public enum Notifier {
         ATRIUM,
         FUTURE,
         DOTGOD;
     }
 
-    public enum PopNotifier{
+    public enum PopNotifier {
         PHOBOS,
         FUTURE,
         DOTGOD,

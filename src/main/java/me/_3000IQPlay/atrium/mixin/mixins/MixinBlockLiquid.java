@@ -16,17 +16,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value={BlockLiquid.class})
+@Mixin(value = {BlockLiquid.class})
 public class MixinBlockLiquid
-extends Block {
+        extends Block {
     protected MixinBlockLiquid(Material materialIn) {
         super(materialIn);
     }
 
-    @Inject(method={"getCollisionBoundingBox"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"getCollisionBoundingBox"}, at = {@At(value = "HEAD")}, cancellable = true)
     public void getCollisionBoundingBoxHook(IBlockState blockState, IBlockAccess worldIn, BlockPos pos, CallbackInfoReturnable<AxisAlignedBB> info) {
         JesusEvent event = new JesusEvent(0, pos);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         if (event.isCanceled()) {
             info.setReturnValue(event.getBoundingBox());
         }

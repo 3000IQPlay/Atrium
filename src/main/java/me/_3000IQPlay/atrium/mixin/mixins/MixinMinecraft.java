@@ -1,6 +1,7 @@
 package me._3000IQPlay.atrium.mixin.mixins;
 
 import javax.annotation.Nullable;
+
 import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.features.gui.custom.GuiCustomMainScreen;
 import me._3000IQPlay.atrium.features.modules.client.Managers;
@@ -24,57 +25,56 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(value={Minecraft.class})
+@Mixin(value = {Minecraft.class})
 public abstract class MixinMinecraft {
     @Shadow
     public abstract void displayGuiScreen(@Nullable GuiScreen var1);
 
-    @Inject(method={"runTickKeyboard"}, at={@At(value="FIELD", target="Lnet/minecraft/client/Minecraft;currentScreen:Lnet/minecraft/client/gui/GuiScreen;", ordinal=0)}, locals=LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = {"runTickKeyboard"}, at = {@At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;currentScreen:Lnet/minecraft/client/gui/GuiScreen;", ordinal = 0)}, locals = LocalCapture.CAPTURE_FAILSOFT)
     private void onRunTickKeyboard(CallbackInfo ci, int i) {
         if (Keyboard.getEventKeyState() && Atrium.moduleManager != null) {
             Atrium.moduleManager.onKeyPressed(i);
         }
     }
 
-    @Inject(method={"getLimitFramerate"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"getLimitFramerate"}, at = {@At(value = "HEAD")}, cancellable = true)
     public void getLimitFramerateHook(CallbackInfoReturnable<Integer> callbackInfoReturnable) {
         try {
             if (Managers.getInstance().unfocusedCpu.getValue().booleanValue() && !Display.isActive()) {
                 callbackInfoReturnable.setReturnValue(Managers.getInstance().cpuFPS.getValue());
             }
-        }
-        catch (NullPointerException nullPointerException) {
+        } catch (NullPointerException nullPointerException) {
             // empty catch block
         }
     }
 
-    @Redirect(method={"runGameLoop"}, at=@At(value="INVOKE", target="Lorg/lwjgl/opengl/Display;sync(I)V", remap=false))
+    @Redirect(method = {"runGameLoop"}, at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;sync(I)V", remap = false))
     public void syncHook(int maxFps) {
         if (Managers.getInstance().betterFrames.getValue().booleanValue()) {
-            Display.sync((int)Managers.getInstance().betterFPS.getValue());
+            Display.sync((int) Managers.getInstance().betterFPS.getValue());
         } else {
-            Display.sync((int)maxFps);
+            Display.sync((int) maxFps);
         }
     }
 
-    @Inject(method={"displayGuiScreen"}, at={@At(value="HEAD")})
+    @Inject(method = {"displayGuiScreen"}, at = {@At(value = "HEAD")})
     private void displayGuiScreen(GuiScreen screen, CallbackInfo ci) {
         if (screen instanceof GuiMainMenu) {
             this.displayGuiScreen(new GuiCustomMainScreen());
         }
     }
 
-    @Redirect(method={"run"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/Minecraft;displayCrashReport(Lnet/minecraft/crash/CrashReport;)V"))
+    @Redirect(method = {"run"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;displayCrashReport(Lnet/minecraft/crash/CrashReport;)V"))
     public void displayCrashReportHook(Minecraft minecraft, CrashReport crashReport) {
         this.unload();
     }
 
-    @Redirect(method={"runTick"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/multiplayer/WorldClient;doVoidFogParticles(III)V"))
+    @Redirect(method = {"runTick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/WorldClient;doVoidFogParticles(III)V"))
     public void doVoidFogParticlesHook(WorldClient world, int x, int y, int z) {
         NoRender.getInstance().doVoidFogParticles(x, y, z);
     }
 
-    @Inject(method={"shutdown"}, at={@At(value="HEAD")})
+    @Inject(method = {"shutdown"}, at = {@At(value = "HEAD")})
     public void shutdownHook(CallbackInfo info) {
         this.unload();
     }
@@ -85,12 +85,12 @@ public abstract class MixinMinecraft {
         System.out.println("Configuration saved.");
     }
 
-    @Redirect(method={"sendClickBlockToController"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/entity/EntityPlayerSP;isHandActive()Z"))
+    @Redirect(method = {"sendClickBlockToController"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;isHandActive()Z"))
     private boolean isHandActiveWrapper(EntityPlayerSP playerSP) {
         return !MultiTask.getInstance().isOn() && playerSP.isHandActive();
     }
 
-    @Redirect(method={"rightClickMouse"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/multiplayer/PlayerControllerMP;getIsHittingBlock()Z", ordinal=0))
+    @Redirect(method = {"rightClickMouse"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerControllerMP;getIsHittingBlock()Z", ordinal = 0))
     private boolean isHittingBlockHook(PlayerControllerMP playerControllerMP) {
         return !MultiTask.getInstance().isOn() && playerControllerMP.getIsHittingBlock();
     }

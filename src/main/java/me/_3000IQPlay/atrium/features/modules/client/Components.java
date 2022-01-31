@@ -43,6 +43,7 @@ public class Components
         extends Module {
     private static final ResourceLocation box = new ResourceLocation("textures/gui/container/shulker_box.png");
     public static ResourceLocation logo = new ResourceLocation("textures/atrium.png");
+    private final Map<EntityPlayer, Map<Integer, ItemStack>> hotbarMap = new HashMap<EntityPlayer, Map<Integer, ItemStack>>();
     public Setting<Boolean> inventory = this.register(new Setting<Boolean>("Inventory", false));
     public Setting<Integer> invX = this.register(new Setting<Object>("InvX", Integer.valueOf(564), Integer.valueOf(0), Integer.valueOf(1000), v -> this.inventory.getValue()));
     public Setting<Integer> invY = this.register(new Setting<Object>("InvY", Integer.valueOf(467), Integer.valueOf(0), Integer.valueOf(1000), v -> this.inventory.getValue()));
@@ -79,7 +80,6 @@ public class Components
     public Setting<Float> clockLineWidth = this.register(new Setting<Object>("ClockLineWidth", Float.valueOf(1.0f), Float.valueOf(0.0f), Float.valueOf(5.0f), v -> this.clock.getValue()));
     public Setting<Integer> clockSlices = this.register(new Setting<Object>("ClockSlices", Integer.valueOf(360), Integer.valueOf(1), Integer.valueOf(720), v -> this.clock.getValue()));
     public Setting<Integer> clockLoops = this.register(new Setting<Object>("ClockLoops", Integer.valueOf(1), Integer.valueOf(1), Integer.valueOf(720), v -> this.clock.getValue()));
-    private final Map<EntityPlayer, Map<Integer, ItemStack>> hotbarMap = new HashMap<EntityPlayer, Map<Integer, ItemStack>>();
 
     public Components() {
         super("Components", "HudComponents", Module.Category.CLIENT, false, false, true);

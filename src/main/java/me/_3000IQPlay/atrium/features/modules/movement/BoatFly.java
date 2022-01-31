@@ -17,13 +17,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BoatFly extends Module {
+    public static BoatFly INSTANCE;
     public Setting<Double> speed = register(new Setting<Double>("Speed", 3.0, 1.0, 10.0));
     public Setting<Double> verticalSpeed = register(new Setting<Double>("VerticalSpeed", 3.0, 1.0, 10.0));
     public Setting<Boolean> noKick = register(new Setting<Boolean>("No-Kick", true));
     public Setting<Boolean> packet = register(new Setting<Boolean>("Packet", true));
     public Setting<Integer> packets = register(new Setting<Object>("Packets", Integer.valueOf(3), Integer.valueOf(1), Integer.valueOf(5), v -> packet.getValue()));
     public Setting<Integer> interact = register(new Setting<Integer>("Delay", 2, 1, 20));
-    public static BoatFly INSTANCE;
     private EntityBoat target;
     private int teleportID;
 
@@ -41,7 +41,7 @@ public class BoatFly extends Module {
             return;
         }
         if (BoatFly.mc.player.getRidingEntity() instanceof EntityBoat) {
-            target = (EntityBoat)BoatFly.mc.player.ridingEntity;
+            target = (EntityBoat) BoatFly.mc.player.ridingEntity;
         }
         BoatFly.mc.player.getRidingEntity().setNoGravity(true);
         BoatFly.mc.player.getRidingEntity().motionY = 0.0;
@@ -81,9 +81,9 @@ public class BoatFly extends Module {
             }
             Vec3d position = BoatFly.mc.player.getRidingEntity().getPositionVector().add(vec);
             BoatFly.mc.player.getRidingEntity().setPosition(position.x, position.y, position.z);
-            BoatFly.mc.player.connection.sendPacket((Packet)new CPacketVehicleMove(BoatFly.mc.player.getRidingEntity()));
+            BoatFly.mc.player.connection.sendPacket((Packet) new CPacketVehicleMove(BoatFly.mc.player.getRidingEntity()));
             for (int i = 0; i < packets.getValue(); ++i) {
-                BoatFly.mc.player.connection.sendPacket((Packet)new CPacketConfirmTeleport(teleportID++));
+                BoatFly.mc.player.connection.sendPacket((Packet) new CPacketConfirmTeleport(teleportID++));
             }
         }
     }
@@ -91,7 +91,7 @@ public class BoatFly extends Module {
     @SubscribeEvent
     public void onSendPacket(PacketEvent.Send event) {
         if (event.getPacket() instanceof CPacketVehicleMove && BoatFly.mc.player.isRiding() && BoatFly.mc.player.ticksExisted % interact.getValue() == 0) {
-            BoatFly.mc.playerController.interactWithEntity((EntityPlayer)BoatFly.mc.player, BoatFly.mc.player.ridingEntity, EnumHand.OFF_HAND);
+            BoatFly.mc.playerController.interactWithEntity((EntityPlayer) BoatFly.mc.player, BoatFly.mc.player.ridingEntity, EnumHand.OFF_HAND);
         }
         if ((event.getPacket() instanceof CPacketPlayer.Rotation || event.getPacket() instanceof CPacketInput) && BoatFly.mc.player.isRiding()) {
             event.setCanceled(true);
@@ -104,7 +104,7 @@ public class BoatFly extends Module {
             event.setCanceled(true);
         }
         if (event.getPacket() instanceof SPacketPlayerPosLook) {
-            teleportID = ((SPacketPlayerPosLook)event.getPacket()).teleportId;
+            teleportID = ((SPacketPlayerPosLook) event.getPacket()).teleportId;
         }
     }
 
@@ -114,9 +114,9 @@ public class BoatFly extends Module {
         float yaw = BoatFly.mc.player.prevRotationYaw + (BoatFly.mc.player.rotationYaw - BoatFly.mc.player.prevRotationYaw) * mc.getRenderPartialTicks();
         if (forward != 0.0f) {
             if (side > 0.0f) {
-                yaw += (float)(forward > 0.0f ? -45 : 45);
+                yaw += (float) (forward > 0.0f ? -45 : 45);
             } else if (side < 0.0f) {
-                yaw += (float)(forward > 0.0f ? 45 : -45);
+                yaw += (float) (forward > 0.0f ? 45 : -45);
             }
             side = 0.0f;
             if (forward > 0.0f) {
@@ -127,8 +127,8 @@ public class BoatFly extends Module {
         }
         double sin = Math.sin(Math.toRadians(yaw + 90.0f));
         double cos = Math.cos(Math.toRadians(yaw + 90.0f));
-        double posX = (double)forward * speed * cos + (double)side * speed * sin;
-        double posZ = (double)forward * speed * sin - (double)side * speed * cos;
+        double posX = (double) forward * speed * cos + (double) side * speed * sin;
+        double posZ = (double) forward * speed * sin - (double) side * speed * cos;
         return new double[]{posX, posZ};
     }
 }

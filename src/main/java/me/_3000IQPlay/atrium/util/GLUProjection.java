@@ -9,10 +9,10 @@ import java.nio.IntBuffer;
 
 public final class GLUProjection {
     private static GLUProjection instance;
+    private final FloatBuffer coords = BufferUtils.createFloatBuffer(3);
     private IntBuffer viewport;
     private FloatBuffer modelview;
     private FloatBuffer projection;
-    private final FloatBuffer coords = BufferUtils.createFloatBuffer(3);
     private Vector3D frustumPos;
     private Vector3D[] frustum;
     private Vector3D[] invFrustum;

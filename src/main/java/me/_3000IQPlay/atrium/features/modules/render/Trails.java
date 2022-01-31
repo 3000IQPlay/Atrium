@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+
 import me._3000IQPlay.atrium.event.events.Render3DEvent;
 import me._3000IQPlay.atrium.features.modules.Module;
 import me._3000IQPlay.atrium.features.setting.Setting;
@@ -55,7 +56,8 @@ public class Trails
         }
         if (this.arrows.getValue().booleanValue() || this.exp.getValue().booleanValue() || this.pearl.getValue().booleanValue() || this.potions.getValue().booleanValue()) {
             for (Entity e : Trails.mc.world.getLoadedEntityList()) {
-                if (!(e instanceof EntityArrow) && !(e instanceof EntityExpBottle) && !(e instanceof EntityPotion)) continue;
+                if (!(e instanceof EntityArrow) && !(e instanceof EntityExpBottle) && !(e instanceof EntityPotion))
+                    continue;
                 if (!this.poses.containsKey(e.getUniqueID())) {
                     this.poses.put(e.getUniqueID(), new ArrayList<Vec3d>(Collections.singletonList(e.getPositionVector())));
                     this.time.put(e.getUniqueID(), 0.05);
@@ -85,29 +87,29 @@ public class Trails
             return;
         }
         GL11.glPushMatrix();
-        GL11.glBlendFunc((int)770, (int)771);
-        GL11.glEnable((int)3042);
-        GL11.glDisable((int)3553);
-        GL11.glDisable((int)2929);
-        GL11.glDepthMask((boolean)false);
-        GL11.glLineWidth((float)this.thick.getValue().floatValue());
+        GL11.glBlendFunc((int) 770, (int) 771);
+        GL11.glEnable((int) 3042);
+        GL11.glDisable((int) 3553);
+        GL11.glDisable((int) 2929);
+        GL11.glDepthMask((boolean) false);
+        GL11.glLineWidth((float) this.thick.getValue().floatValue());
         for (UUID uuid : this.poses.keySet()) {
             if (this.poses.get(uuid).size() <= 2) continue;
             int delay = 0;
-            GL11.glBegin((int)1);
+            GL11.glBegin((int) 1);
             for (int i = 1; i < this.poses.get(uuid).size(); ++i) {
                 delay += this.rDelay.getValue().intValue();
-                GL11.glColor4d((double)((float)this.red.getValue().intValue() / 255.0f), (double)((float)this.green.getValue().intValue() / 255.0f), (double)((float)this.blue.getValue().intValue() / 255.0f), (double)((float)this.alpha.getValue().intValue() / 255.0f));
+                GL11.glColor4d((double) ((float) this.red.getValue().intValue() / 255.0f), (double) ((float) this.green.getValue().intValue() / 255.0f), (double) ((float) this.blue.getValue().intValue() / 255.0f), (double) ((float) this.alpha.getValue().intValue() / 255.0f));
                 List<Vec3d> pos = this.poses.get(uuid);
-                GL11.glVertex3d((double)(pos.get((int)i).x - Trails.mc.getRenderManager().viewerPosX), (double)(pos.get((int)i).y - Trails.mc.getRenderManager().viewerPosY), (double)(pos.get((int)i).z - Trails.mc.getRenderManager().viewerPosZ));
-                GL11.glVertex3d((double)(pos.get((int)(i - 1)).x - Trails.mc.getRenderManager().viewerPosX), (double)(pos.get((int)(i - 1)).y - Trails.mc.getRenderManager().viewerPosY), (double)(pos.get((int)(i - 1)).z - Trails.mc.getRenderManager().viewerPosZ));
+                GL11.glVertex3d((double) (pos.get((int) i).x - Trails.mc.getRenderManager().viewerPosX), (double) (pos.get((int) i).y - Trails.mc.getRenderManager().viewerPosY), (double) (pos.get((int) i).z - Trails.mc.getRenderManager().viewerPosZ));
+                GL11.glVertex3d((double) (pos.get((int) (i - 1)).x - Trails.mc.getRenderManager().viewerPosX), (double) (pos.get((int) (i - 1)).y - Trails.mc.getRenderManager().viewerPosY), (double) (pos.get((int) (i - 1)).z - Trails.mc.getRenderManager().viewerPosZ));
             }
             GL11.glEnd();
         }
-        GL11.glEnable((int)3553);
-        GL11.glEnable((int)2929);
-        GL11.glDepthMask((boolean)true);
-        GL11.glDisable((int)3042);
+        GL11.glEnable((int) 3553);
+        GL11.glEnable((int) 2929);
+        GL11.glDepthMask((boolean) true);
+        GL11.glDisable((int) 3042);
         GL11.glPopMatrix();
     }
 }

@@ -10,16 +10,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value={EntityLivingBase.class})
+@Mixin(value = {EntityLivingBase.class})
 public abstract class MixinEntityLivingBase
-extends Entity {
+        extends Entity {
     public MixinEntityLivingBase(World worldIn) {
         super(worldIn);
     }
 
-    @Inject(method={"isElytraFlying"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"isElytraFlying"}, at = {@At(value = "HEAD")}, cancellable = true)
     private void isElytraFlyingHook(CallbackInfoReturnable<Boolean> info) {
-        if (Util.mc.player != null && Util.mc.player.equals((Object)this) && ElytraFlight.getInstance().isOn() && ElytraFlight.getInstance().mode.getValue() == ElytraFlight.Mode.BETTER) {
+        if (Util.mc.player != null && Util.mc.player.equals((Object) this) && ElytraFlight.getInstance().isOn() && ElytraFlight.getInstance().mode.getValue() == ElytraFlight.Mode.BETTER) {
             info.setReturnValue(false);
         }
     }

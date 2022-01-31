@@ -157,7 +157,7 @@ public class Offhand
         } else if (this.currentMode != Mode2.CRYSTALS && this.crystal.getValue().booleanValue() && (EntityUtil.isSafe(mc.player) && EntityUtil.getHealth(mc.player, true) > this.crystalHoleHealth.getValue().floatValue() || EntityUtil.getHealth(mc.player, true) > this.crystalHealth.getValue().floatValue())) {
             this.currentMode = Mode2.CRYSTALS;
         }
-        if(this.antiGappleFail.getValue()) {
+        if (this.antiGappleFail.getValue()) {
             if (this.currentMode == Mode2.GAPPLES && (!EntityUtil.isSafe(mc.player) && EntityUtil.getHealth(mc.player, true) <= this.crystalHealth.getValue() || EntityUtil.getHealth(mc.player, true) <= this.crystalHoleHealth.getValue())) {
                 this.switchedForHealthReason = true;
                 this.setMode(Mode2.TOTEMS);
@@ -179,7 +179,7 @@ public class Offhand
         if (this.currentMode == Mode2.CRYSTALS && this.armorCheck.getValue().booleanValue() && (mc.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.AIR || mc.player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == Items.AIR || mc.player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == Items.AIR || mc.player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == Items.AIR)) {
             this.setMode(Mode2.TOTEMS);
         }
-        if ((this.currentMode == Mode2.CRYSTALS || this.currentMode == Mode2.GAPPLES) && mc.player.fallDistance > this.Height.getValue().floatValue() && this.fallDistance.getValue()){
+        if ((this.currentMode == Mode2.CRYSTALS || this.currentMode == Mode2.GAPPLES) && mc.player.fallDistance > this.Height.getValue().floatValue() && this.fallDistance.getValue()) {
             this.setMode(Mode2.TOTEMS);
         }
         if (mc.currentScreen instanceof GuiContainer && !(mc.currentScreen instanceof GuiInventory)) {

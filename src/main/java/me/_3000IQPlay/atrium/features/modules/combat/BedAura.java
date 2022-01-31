@@ -1,10 +1,12 @@
 package me._3000IQPlay.atrium.features.modules.combat;
 
 import com.google.common.util.concurrent.AtomicDouble;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import me._3000IQPlay.atrium.event.events.PacketEvent;
 import me._3000IQPlay.atrium.event.events.UpdateWalkingPlayerEvent;
 import me._3000IQPlay.atrium.features.modules.Module;
@@ -49,14 +51,14 @@ public class BedAura
     private final Setting<Boolean> suicide = this.register(new Setting<Object>("Suicide", Boolean.valueOf(false), v -> this.explode.getValue()));
     private final Setting<Boolean> removeTiles = this.register(new Setting<Boolean>("RemoveTiles", false));
     private final Setting<Boolean> rotate = this.register(new Setting<Boolean>("Rotate", false));
-    private final Setting<Logic> logic = this.register(new Setting<Object>("Logic", (Object)Logic.BREAKPLACE, v -> this.place.getValue() != false && this.explode.getValue() != false));
+    private final Setting<Logic> logic = this.register(new Setting<Object>("Logic", (Object) Logic.BREAKPLACE, v -> this.place.getValue() != false && this.explode.getValue() != false));
     private final Timer breakTimer = new Timer();
     private final Timer placeTimer = new Timer();
-    private EntityPlayer target = null;
-    private boolean sendRotationPacket = false;
     private final AtomicDouble yaw = new AtomicDouble(-1.0);
     private final AtomicDouble pitch = new AtomicDouble(-1.0);
     private final AtomicBoolean shouldRotate = new AtomicBoolean(false);
+    private EntityPlayer target = null;
+    private boolean sendRotationPacket = false;
     private BlockPos maxPos = null;
     private int lastHotbarSlot = -1;
     private int bedSlot = -1;
@@ -68,9 +70,9 @@ public class BedAura
     @SubscribeEvent
     public void onPacket(PacketEvent.Send event) {
         if (this.shouldRotate.get() && event.getPacket() instanceof CPacketPlayer) {
-            CPacketPlayer packet = (CPacketPlayer)event.getPacket();
-            packet.yaw = (float)this.yaw.get();
-            packet.pitch = (float)this.pitch.get();
+            CPacketPlayer packet = (CPacketPlayer) event.getPacket();
+            packet.yaw = (float) this.yaw.get();
+            packet.pitch = (float) this.pitch.get();
             this.shouldRotate.set(false);
         }
     }
@@ -101,10 +103,10 @@ public class BedAura
 
     private void breakBeds() {
         if (this.explode.getValue().booleanValue() && this.breakTimer.passedMs(this.breakDelay.getValue().intValue()) && this.maxPos != null) {
-            BedAura.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+            BedAura.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
             BlockUtil.rightClickBlockLegit(this.maxPos, this.range.getValue().floatValue(), this.rotate.getValue() != false && this.place.getValue() == false, EnumHand.MAIN_HAND, this.yaw, this.pitch, this.shouldRotate, true);
             if (BedAura.mc.player.isSneaking()) {
-                BedAura.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.START_SNEAKING));
+                BedAura.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.START_SNEAKING));
             }
             this.breakTimer.reset();
         }
@@ -117,7 +119,7 @@ public class BedAura
             ArrayList<BedData> removedBlocks = new ArrayList<BedData>();
             for (TileEntity tile : BedAura.mc.world.loadedTileEntityList) {
                 if (!(tile instanceof TileEntityBed)) continue;
-                TileEntityBed bed = (TileEntityBed)tile;
+                TileEntityBed bed = (TileEntityBed) tile;
                 BedData data = new BedData(tile.getPos(), BedAura.mc.world.getBlockState(tile.getPos()), bed, bed.isHeadPiece());
                 removedBlocks.add(data);
             }
@@ -127,10 +129,12 @@ public class BedAura
             for (BedData data : removedBlocks) {
                 float selfDamage;
                 BlockPos pos;
-                if (!data.isHeadPiece() || !(BedAura.mc.player.getDistanceSq(pos = data.getPos()) <= MathUtil.square(this.breakRange.getValue().floatValue())) || !((double)(selfDamage = DamageUtil.calculateDamage(pos, (Entity) BedAura.mc.player)) + 1.0 < (double)EntityUtil.getHealth((Entity) BedAura.mc.player)) && DamageUtil.canTakeDamage(this.suicide.getValue())) continue;
+                if (!data.isHeadPiece() || !(BedAura.mc.player.getDistanceSq(pos = data.getPos()) <= MathUtil.square(this.breakRange.getValue().floatValue())) || !((double) (selfDamage = DamageUtil.calculateDamage(pos, (Entity) BedAura.mc.player)) + 1.0 < (double) EntityUtil.getHealth((Entity) BedAura.mc.player)) && DamageUtil.canTakeDamage(this.suicide.getValue()))
+                    continue;
                 for (EntityPlayer player : BedAura.mc.world.playerEntities) {
                     float damage;
-                    if (!(player.getDistanceSq(pos) < MathUtil.square(this.range.getValue().floatValue())) || !EntityUtil.isValid((Entity)player, this.range.getValue().floatValue() + this.breakRange.getValue().floatValue()) || !((damage = DamageUtil.calculateDamage(pos, (Entity)player)) > selfDamage || damage > this.minDamage.getValue().floatValue() && !DamageUtil.canTakeDamage(this.suicide.getValue())) && !(damage > EntityUtil.getHealth((Entity)player)) || !(damage > maxDamage)) continue;
+                    if (!(player.getDistanceSq(pos) < MathUtil.square(this.range.getValue().floatValue())) || !EntityUtil.isValid((Entity) player, this.range.getValue().floatValue() + this.breakRange.getValue().floatValue()) || !((damage = DamageUtil.calculateDamage(pos, (Entity) player)) > selfDamage || damage > this.minDamage.getValue().floatValue() && !DamageUtil.canTakeDamage(this.suicide.getValue())) && !(damage > EntityUtil.getHealth((Entity) player)) || !(damage > maxDamage))
+                        continue;
                     maxDamage = damage;
                     this.maxPos = pos;
                 }
@@ -143,10 +147,12 @@ public class BedAura
                 float selfDamage;
                 BlockPos pos;
                 TileEntityBed bed;
-                if (!(tile instanceof TileEntityBed) || !(bed = (TileEntityBed)tile).isHeadPiece() || !(BedAura.mc.player.getDistanceSq(pos = bed.getPos()) <= MathUtil.square(this.breakRange.getValue().floatValue())) || !((double)(selfDamage = DamageUtil.calculateDamage(pos, (Entity) BedAura.mc.player)) + 1.0 < (double)EntityUtil.getHealth((Entity) BedAura.mc.player)) && DamageUtil.canTakeDamage(this.suicide.getValue())) continue;
+                if (!(tile instanceof TileEntityBed) || !(bed = (TileEntityBed) tile).isHeadPiece() || !(BedAura.mc.player.getDistanceSq(pos = bed.getPos()) <= MathUtil.square(this.breakRange.getValue().floatValue())) || !((double) (selfDamage = DamageUtil.calculateDamage(pos, (Entity) BedAura.mc.player)) + 1.0 < (double) EntityUtil.getHealth((Entity) BedAura.mc.player)) && DamageUtil.canTakeDamage(this.suicide.getValue()))
+                    continue;
                 for (EntityPlayer player : BedAura.mc.world.playerEntities) {
                     float damage;
-                    if (!(player.getDistanceSq(pos) < MathUtil.square(this.range.getValue().floatValue())) || !EntityUtil.isValid((Entity)player, this.range.getValue().floatValue() + this.breakRange.getValue().floatValue()) || !((damage = DamageUtil.calculateDamage(pos, (Entity)player)) > selfDamage || damage > this.minDamage.getValue().floatValue() && !DamageUtil.canTakeDamage(this.suicide.getValue())) && !(damage > EntityUtil.getHealth((Entity)player)) || !(damage > maxDamage)) continue;
+                    if (!(player.getDistanceSq(pos) < MathUtil.square(this.range.getValue().floatValue())) || !EntityUtil.isValid((Entity) player, this.range.getValue().floatValue() + this.breakRange.getValue().floatValue()) || !((damage = DamageUtil.calculateDamage(pos, (Entity) player)) > selfDamage || damage > this.minDamage.getValue().floatValue() && !DamageUtil.canTakeDamage(this.suicide.getValue())) && !(damage > EntityUtil.getHealth((Entity) player)) || !(damage > maxDamage))
+                        continue;
                     maxDamage = damage;
                     this.maxPos = pos;
                 }
@@ -178,7 +184,7 @@ public class BedAura
             return;
         }
         float damage = DamageUtil.calculateDamage(pos, (Entity) BedAura.mc.player);
-        if ((double)damage > (double)EntityUtil.getHealth((Entity) BedAura.mc.player) + 0.5) {
+        if ((double) damage > (double) EntityUtil.getHealth((Entity) BedAura.mc.player) + 0.5) {
             if (firstCheck) {
                 this.placeBed(pos.up(), false);
             }
@@ -194,7 +200,8 @@ public class BedAura
         HashMap<BlockPos, EnumFacing> facings = new HashMap<BlockPos, EnumFacing>();
         for (EnumFacing facing : EnumFacing.values()) {
             BlockPos position;
-            if (facing == EnumFacing.DOWN || facing == EnumFacing.UP || !(BedAura.mc.player.getDistanceSq(position = pos.offset(facing)) <= MathUtil.square(this.placeRange.getValue().floatValue())) || !BedAura.mc.world.getBlockState(position).getMaterial().isReplaceable() || BedAura.mc.world.getBlockState(position.down()).getMaterial().isReplaceable()) continue;
+            if (facing == EnumFacing.DOWN || facing == EnumFacing.UP || !(BedAura.mc.player.getDistanceSq(position = pos.offset(facing)) <= MathUtil.square(this.placeRange.getValue().floatValue())) || !BedAura.mc.world.getBlockState(position).getMaterial().isReplaceable() || BedAura.mc.world.getBlockState(position.down()).getMaterial().isReplaceable())
+                continue;
             positions.add(position);
             facings.put(position, facing.getOpposite());
         }
@@ -205,21 +212,21 @@ public class BedAura
             return;
         }
         positions.sort(Comparator.comparingDouble(pos2 -> BedAura.mc.player.getDistanceSq(pos2)));
-        BlockPos finalPos = (BlockPos)positions.get(0);
-        EnumFacing finalFacing = (EnumFacing)facings.get((Object)finalPos);
+        BlockPos finalPos = (BlockPos) positions.get(0);
+        EnumFacing finalFacing = (EnumFacing) facings.get((Object) finalPos);
         float[] rotation = RotationUtil.simpleFacing(finalFacing);
         if (!this.sendRotationPacket && this.extraPacket.getValue().booleanValue()) {
             RotationUtil.faceYawAndPitch(rotation[0], rotation[1]);
             this.sendRotationPacket = true;
         }
-        this.yaw.set((double)rotation[0]);
-        this.pitch.set((double)rotation[1]);
+        this.yaw.set((double) rotation[0]);
+        this.pitch.set((double) rotation[1]);
         this.shouldRotate.set(true);
-        Vec3d hitVec = new Vec3d((Vec3i)finalPos.down()).add(0.5, 0.5, 0.5).add(new Vec3d(finalFacing.getOpposite().getDirectionVec()).scale(0.5));
-        BedAura.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.START_SNEAKING));
+        Vec3d hitVec = new Vec3d((Vec3i) finalPos.down()).add(0.5, 0.5, 0.5).add(new Vec3d(finalFacing.getOpposite().getDirectionVec()).scale(0.5));
+        BedAura.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.START_SNEAKING));
         InventoryUtil.switchToHotbarSlot(this.bedSlot, false);
         BlockUtil.rightClickBlock(finalPos.down(), hitVec, this.bedSlot == -2 ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue());
-        BedAura.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+        BedAura.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) BedAura.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
         this.placeTimer.reset();
     }
 

@@ -32,11 +32,11 @@ public class AutoGG
     private final Setting<Integer> targetResetTimer = this.register(new Setting<Integer>("Reset", 30, 0, 90));
     private final Setting<Integer> delay = this.register(new Setting<Integer>("Delay", 5, 0, 30));
     private final Setting<Boolean> test = this.register(new Setting<Boolean>("Test", false));
+    private final Timer timer = new Timer();
+    private final Timer cooldownTimer = new Timer();
     public Map<EntityPlayer, Integer> targets = new ConcurrentHashMap<EntityPlayer, Integer>();
     public List<String> messages = new ArrayList<String>();
     public EntityPlayer cauraTarget;
-    private final Timer timer = new Timer();
-    private final Timer cooldownTimer = new Timer();
     private boolean cooldown;
 
     public AutoGG() {

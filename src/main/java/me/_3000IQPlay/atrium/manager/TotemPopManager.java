@@ -15,12 +15,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TotemPopManager
         extends Feature {
+    private final Set<EntityPlayer> toAnnounce = new HashSet<>();
     private Notifications notifications;
-    private Map<EntityPlayer, Integer> poplist = new ConcurrentHashMap <> ( );
-    private final Set<EntityPlayer> toAnnounce = new HashSet <> ( );
+    private Map<EntityPlayer, Integer> poplist = new ConcurrentHashMap<>();
 
     public void onUpdate() {
-        if (this.notifications.totemAnnounce.passedMs( this.notifications.delay.getValue ( ) ) && this.notifications.isOn() && this.notifications.totemPops.getValue ( ) ) {
+        if (this.notifications.totemAnnounce.passedMs(this.notifications.delay.getValue()) && this.notifications.isOn() && this.notifications.totemPops.getValue()) {
             for (EntityPlayer player : this.toAnnounce) {
                 if (player == null) continue;
                 int playerNumber = 0;
@@ -156,7 +156,7 @@ public class TotemPopManager
 
 
     public void onDeath(EntityPlayer player) {
-        if (this.getTotemPops(player) != 0 && !player.equals(TotemPopManager.mc.player) && this.notifications.isOn() && this.notifications.totemPops.getValue ( ) ) {
+        if (this.getTotemPops(player) != 0 && !player.equals(TotemPopManager.mc.player) && this.notifications.isOn() && this.notifications.totemPops.getValue()) {
             int playerNumber = 0;
             for (char character : player.getName().toCharArray()) {
                 playerNumber += character;
@@ -181,7 +181,7 @@ public class TotemPopManager
     }
 
     public void clearList() {
-        this.poplist = new ConcurrentHashMap <> ( );
+        this.poplist = new ConcurrentHashMap<>();
     }
 
     public void resetPops(EntityPlayer player) {

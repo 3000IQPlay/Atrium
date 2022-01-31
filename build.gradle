@@ -56,12 +56,11 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
-    
+
     compile 'club.minnced:java-discord-rpc:2.0.2'
     //compile 'com.googlecode.json-simple:json-simple:1.1.1'
-    
-}
 
+}
 
 
 task getDeps(type: Copy) {
@@ -84,7 +83,7 @@ processResources {
 
 shadowJar {
     dependencies {
-		include(dependency('club.minnced:java-discord-rpc'))
+        include(dependency('club.minnced:java-discord-rpc'))
         include(dependency('com.googlecode.json-simple:json-simple:1.1.1'))
         include(dependency('org.spongepowered:mixin'))
     }
@@ -96,7 +95,7 @@ shadowJar {
 mixin {
     defaultObfuscationEnv searge
     add sourceSets.main, 'mixins.atrium.refmap.json'
-    
+
 }
 
 reobf {

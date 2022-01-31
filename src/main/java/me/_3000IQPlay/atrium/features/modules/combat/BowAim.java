@@ -23,13 +23,14 @@ public class BowAim
             float tickDis = 100.0f;
             for (EntityPlayer p : BowAim.mc.world.playerEntities) {
                 float dis;
-                if (p instanceof EntityPlayerSP || Atrium.friendManager.isFriend(p.getName()) || !((dis = p.getDistance((Entity)BowAim.mc.player)) < tickDis)) continue;
+                if (p instanceof EntityPlayerSP || Atrium.friendManager.isFriend(p.getName()) || !((dis = p.getDistance((Entity) BowAim.mc.player)) < tickDis))
+                    continue;
                 tickDis = dis;
                 player = p;
             }
             if (player != null) {
                 Vec3d pos = EntityUtil.getInterpolatedPos(player, mc.getRenderPartialTicks());
-                float[] angels = MathUtil.calcAngle(EntityUtil.getInterpolatedPos((Entity)BowAim.mc.player, mc.getRenderPartialTicks()), pos);
+                float[] angels = MathUtil.calcAngle(EntityUtil.getInterpolatedPos((Entity) BowAim.mc.player, mc.getRenderPartialTicks()), pos);
                 BowAim.mc.player.rotationYaw = angels[0];
                 BowAim.mc.player.rotationPitch = angels[1];
             }

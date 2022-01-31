@@ -1,7 +1,9 @@
 package me._3000IQPlay.atrium.mixin.mixins;
 
 import com.google.common.base.Predicate;
+
 import java.util.List;
+
 import me._3000IQPlay.atrium.event.events.PushEvent;
 import me._3000IQPlay.atrium.features.modules.render.NoRender;
 import net.minecraft.entity.Entity;
@@ -19,19 +21,18 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value={World.class})
+@Mixin(value = {World.class})
 public class MixinWorld {
-    @Redirect(method={"getEntitiesWithinAABB(Ljava/lang/Class;Lnet/minecraft/util/math/AxisAlignedBB;Lcom/google/common/base/Predicate;)Ljava/util/List;"}, at=@At(value="INVOKE", target="Lnet/minecraft/world/chunk/Chunk;getEntitiesOfTypeWithinAABB(Ljava/lang/Class;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lcom/google/common/base/Predicate;)V"))
+    @Redirect(method = {"getEntitiesWithinAABB(Ljava/lang/Class;Lnet/minecraft/util/math/AxisAlignedBB;Lcom/google/common/base/Predicate;)Ljava/util/List;"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;getEntitiesOfTypeWithinAABB(Ljava/lang/Class;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lcom/google/common/base/Predicate;)V"))
     public <T extends Entity> void getEntitiesOfTypeWithinAABBHook(Chunk chunk, Class<? extends T> entityClass, AxisAlignedBB aabb, List<T> listToFill, Predicate<? super T> filter) {
         try {
             chunk.getEntitiesOfTypeWithinAABB(entityClass, aabb, listToFill, filter);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             // empty catch block
         }
     }
 
-    @Inject(method={"checkLightFor"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"checkLightFor"}, at = {@At(value = "HEAD")}, cancellable = true)
     private void updateLightmapHook(EnumSkyBlock lightType, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
         if (lightType == EnumSkyBlock.SKY && NoRender.getInstance().isOn() && (NoRender.getInstance().skylight.getValue() == NoRender.Skylight.WORLD || NoRender.getInstance().skylight.getValue() == NoRender.Skylight.ALL)) {
             info.setReturnValue(true);
@@ -39,10 +40,10 @@ public class MixinWorld {
         }
     }
 
-    @Redirect(method={"handleMaterialAcceleration"}, at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;isPushedByWater()Z"))
+    @Redirect(method = {"handleMaterialAcceleration"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;isPushedByWater()Z"))
     public boolean isPushedbyWaterHook(Entity entity) {
         PushEvent event = new PushEvent(2, entity);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         return entity.isPushedByWater() && !event.isCanceled();
     }
 }

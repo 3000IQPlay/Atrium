@@ -13,6 +13,7 @@ public class SpeedManager
     public static final double LAST_JUMP_INFO_DURATION_DEFAULT = 3.0;
     public static boolean didJumpThisTick = false;
     public static boolean isJumping = false;
+    private final int distancer = 20;
     public double firstJumpSpeed = 0.0;
     public double lastJumpSpeed = 0.0;
     public double percentJumpSpeedChanged = 0.0;
@@ -22,7 +23,6 @@ public class SpeedManager
     public boolean wasFirstJump = true;
     public double speedometerCurrentSpeed = 0.0;
     public HashMap<EntityPlayer, Double> playerSpeeds = new HashMap();
-    private final int distancer = 20;
 
     public static void setDidJumpThisTick(boolean val) {
         didJumpThisTick = val;

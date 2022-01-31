@@ -19,8 +19,8 @@ import java.awt.datatransfer.DataFlavor;
 
 public class StringButton
         extends Button {
-    public boolean isListening;
     private final Setting setting;
+    public boolean isListening;
     private CurrentString currentString = new CurrentString("");
 
     public StringButton(Setting setting) {

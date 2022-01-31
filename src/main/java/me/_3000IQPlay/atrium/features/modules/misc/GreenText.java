@@ -5,7 +5,7 @@ import me._3000IQPlay.atrium.features.modules.Module;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class GreenText 
+public class GreenText
         extends Module {
     public Boolean suffix = true;
     public String s;
