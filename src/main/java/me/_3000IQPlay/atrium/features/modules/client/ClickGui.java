@@ -28,6 +28,7 @@ public class ClickGui
     public Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
     public Setting<Integer> hoverAlpha = this.register(new Setting<Integer>("Alpha", 165, 0, 255));
     public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 240, 0, 255));
+	public Setting<Integer> backgroundAlpha = this.register(new Setting<Integer>("BackgroundAlpha", 145, 0, 255));
     public Setting<Boolean> customFov = this.register(new Setting<Boolean>("CustomFov", false));
     public Setting<Float> fov = this.register(new Setting<Object>("Fov", Float.valueOf(135.0f), Float.valueOf(-180.0f), Float.valueOf(180.0f), v -> this.customFov.getValue()));
     public Setting<Boolean> openCloseChange = this.register(new Setting<Boolean>("Open/Close", true));
