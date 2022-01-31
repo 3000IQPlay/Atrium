@@ -10,25 +10,25 @@ import me._3000IQPlay.atrium.util.Timer;
 
 public class CSGOWatermark extends Module {
 
-    Timer delayTimer = new Timer();
     public Setting<Integer> X = this.register(new Setting("WatermarkX", 0, 0, 300));
     public Setting<Integer> Y = this.register(new Setting("WatermarkY", 0, 0, 300));
     public float hue;
     public int red = 1;
     public int green = 1;
     public int blue = 1;
-
+    Timer delayTimer = new Timer();
     private String message = "";
+
     public CSGOWatermark() {
         super("CSGOWatermark", "CS:GO", Module.Category.CLIENT, true, false, false);
     }
 
     @Override
-    public void onRender2D ( Render2DEvent event ) {
+    public void onRender2D(Render2DEvent event) {
         drawCsgoWatermark();
     }
 
-    public void drawCsgoWatermark () {
+    public void drawCsgoWatermark() {
         int padding = 5;
         message = "Atrium v1.5.6 | " + mc.player.getName() + " | " + Atrium.serverManager.getPing() + "ms";
         Integer textWidth = mc.fontRenderer.getStringWidth(message); // thanks to wurst+ 3

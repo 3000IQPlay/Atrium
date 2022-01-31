@@ -6,9 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(value={EntityPlayer.class})
+@Mixin(value = {EntityPlayer.class})
 public abstract class MixinEntityPlayer
-extends EntityLivingBase {
+        extends EntityLivingBase {
     public MixinEntityPlayer(World worldIn, GameProfile gameProfileIn) {
         super(worldIn);
     }

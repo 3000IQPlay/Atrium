@@ -182,7 +182,7 @@ public class Module
 
     public enum Category {
         COMBAT("Combat"),
-		EXPLOIT("Exploit"),
+        EXPLOIT("Exploit"),
         MISC("Misc"),
         RENDER("Render"),
         MOVEMENT("Movement"),

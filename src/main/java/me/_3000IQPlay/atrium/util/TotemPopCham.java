@@ -34,52 +34,6 @@ public class TotemPopCham {
         this.alphaLine = alphaFill;
     }
 
-    @SubscribeEvent
-    public void onRenderWorld(final RenderWorldLastEvent event) {
-        if (player == null || mc.world == null || mc.player == null) {
-            return;
-        }
-        GL11.glLineWidth(1.0f);
-        Color lineColorS = new Color(PopChams.rL.getValue(), PopChams.bL.getValue(), PopChams.gL.getValue(), PopChams.aL.getValue());
-        Color fillColorS = new Color(PopChams.rF.getValue(), PopChams.bF.getValue(), PopChams.gF.getValue(),PopChams. aF.getValue());
-        int lineA = lineColorS.getAlpha();
-        int fillA = (fillColorS).getAlpha();
-        final long time = System.currentTimeMillis() - this.startTime - ((Number)PopChams.fadestart.getValue()).longValue();
-        if (System.currentTimeMillis() - this.startTime > ((Number)PopChams.fadestart.getValue()).longValue()) {
-            double normal = this.normalize((double)time, 0.0, ((Number)PopChams.fadetime.getValue()).doubleValue());
-            normal = MathHelper.clamp(normal, 0.0, 1.0);
-            normal = -normal + 1.0;
-            lineA *= (int)normal;
-            fillA *= (int)normal;
-        }
-        Color lineColor = newAlpha(lineColorS, lineA);
-        Color fillColor = newAlpha(fillColorS, fillA);
-        if (this.player != null && this.playerModel != null) {
-            NordTessellator.prepareGL();
-            GL11.glPushAttrib(1048575);
-            GL11.glEnable(2881);
-            GL11.glEnable(2848);
-            if (alphaFill > 1) alphaFill -= PopChams.fadetime.getValue();
-            Color fillFinal = new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), (int)alphaFill);
-
-            if (alphaLine > 1) alphaLine -= PopChams.fadetime.getValue();
-            Color outlineFinal = new Color(lineColor.getRed(), lineColor.getGreen(), lineColor.getBlue(), (int)alphaLine);
-            glColor(fillFinal);
-            GL11.glPolygonMode(1032, 6914);
-            renderEntity(this.player, this.playerModel, this.player.limbSwing, this.player.limbSwingAmount, (float)this.player.ticksExisted, this.player.rotationYawHead, this.player.rotationPitch, 1);
-            glColor(outlineFinal);
-            GL11.glPolygonMode(1032, 6913);
-            renderEntity(this.player, this.playerModel, this.player.limbSwing, this.player.limbSwingAmount, (float)this.player.ticksExisted, player.rotationYawHead, this.player.rotationPitch, 1);
-            GL11.glPolygonMode(1032, 6914);
-            GL11.glPopAttrib();
-            NordTessellator.releaseGL();
-        }
-    }
-
-    double normalize(final double value, final double min, final double max) {
-        return (value - min) / (max - min);
-    }
-
     public static void renderEntity(final EntityLivingBase entity, final ModelBase modelBase, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float netHeadYaw, final float headPitch, final float scale) {
         if (mc.getRenderManager() == null) {
             return;
@@ -112,7 +66,7 @@ public class TotemPopCham {
     }
 
     public static void renderLivingAt(final double x, final double y, final double z) {
-        GlStateManager.translate((float)x, (float)y, (float)z);
+        GlStateManager.translate((float) x, (float) y, (float) z);
     }
 
     public static float prepareScale(final EntityLivingBase entity, final float scale) {
@@ -132,7 +86,8 @@ public class TotemPopCham {
 
     public static float interpolateRotation(final float prevYawOffset, final float yawOffset, final float partialTicks) {
         float f;
-        for (f = yawOffset - prevYawOffset; f < -180.0f; f += 360.0f) {}
+        for (f = yawOffset - prevYawOffset; f < -180.0f; f += 360.0f) {
+        }
         while (f >= 180.0f) {
             f -= 360.0f;
         }
@@ -151,6 +106,51 @@ public class TotemPopCham {
         return 0.0f;
     }
 
+    @SubscribeEvent
+    public void onRenderWorld(final RenderWorldLastEvent event) {
+        if (player == null || mc.world == null || mc.player == null) {
+            return;
+        }
+        GL11.glLineWidth(1.0f);
+        Color lineColorS = new Color(PopChams.rL.getValue(), PopChams.bL.getValue(), PopChams.gL.getValue(), PopChams.aL.getValue());
+        Color fillColorS = new Color(PopChams.rF.getValue(), PopChams.bF.getValue(), PopChams.gF.getValue(), PopChams.aF.getValue());
+        int lineA = lineColorS.getAlpha();
+        int fillA = (fillColorS).getAlpha();
+        final long time = System.currentTimeMillis() - this.startTime - ((Number) PopChams.fadestart.getValue()).longValue();
+        if (System.currentTimeMillis() - this.startTime > ((Number) PopChams.fadestart.getValue()).longValue()) {
+            double normal = this.normalize((double) time, 0.0, ((Number) PopChams.fadetime.getValue()).doubleValue());
+            normal = MathHelper.clamp(normal, 0.0, 1.0);
+            normal = -normal + 1.0;
+            lineA *= (int) normal;
+            fillA *= (int) normal;
+        }
+        Color lineColor = newAlpha(lineColorS, lineA);
+        Color fillColor = newAlpha(fillColorS, fillA);
+        if (this.player != null && this.playerModel != null) {
+            NordTessellator.prepareGL();
+            GL11.glPushAttrib(1048575);
+            GL11.glEnable(2881);
+            GL11.glEnable(2848);
+            if (alphaFill > 1) alphaFill -= PopChams.fadetime.getValue();
+            Color fillFinal = new Color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), (int) alphaFill);
+
+            if (alphaLine > 1) alphaLine -= PopChams.fadetime.getValue();
+            Color outlineFinal = new Color(lineColor.getRed(), lineColor.getGreen(), lineColor.getBlue(), (int) alphaLine);
+            glColor(fillFinal);
+            GL11.glPolygonMode(1032, 6914);
+            renderEntity(this.player, this.playerModel, this.player.limbSwing, this.player.limbSwingAmount, (float) this.player.ticksExisted, this.player.rotationYawHead, this.player.rotationPitch, 1);
+            glColor(outlineFinal);
+            GL11.glPolygonMode(1032, 6913);
+            renderEntity(this.player, this.playerModel, this.player.limbSwing, this.player.limbSwingAmount, (float) this.player.ticksExisted, player.rotationYawHead, this.player.rotationPitch, 1);
+            GL11.glPolygonMode(1032, 6914);
+            GL11.glPopAttrib();
+            NordTessellator.releaseGL();
+        }
+    }
+
+    double normalize(final double value, final double min, final double max) {
+        return (value - min) / (max - min);
+    }
 
 
 }

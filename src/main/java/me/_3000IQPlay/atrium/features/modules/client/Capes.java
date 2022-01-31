@@ -29,8 +29,8 @@ public class Capes
         for (String name : UUIDs.keySet()) {
             for (String uuid : UUIDs.get(name)) {
                 if (name.equalsIgnoreCase("_3000IQPlay") && player.getUniqueID().toString().equals(uuid)) {
-                return _3000IQPLAY_CAPE;
-				}
+                    return _3000IQPLAY_CAPE;
+                }
             }
         }
         return null;

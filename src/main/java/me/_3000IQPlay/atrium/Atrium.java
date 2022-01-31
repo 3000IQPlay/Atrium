@@ -153,8 +153,8 @@ public class Atrium {
             unloaded = true;
         }
     }
-	
-	public static void setWindowIcon() {
+
+    public static void setWindowIcon() {
         if (Util.getOSType() != Util.EnumOS.OSX) {
             try (InputStream inputStream16x = Minecraft.class.getResourceAsStream("/assets/minecraft/textures/icons/icon-16x.png");
                  InputStream inputStream32x = Minecraft.class.getResourceAsStream("/assets/minecraft/textures/icons/icon-32x.png")) {
@@ -165,8 +165,8 @@ public class Atrium {
             }
         }
     }
-	
-	private void setWindowsIcon() {
+
+    private void setWindowsIcon() {
         Atrium.setWindowIcon();
     }
 
@@ -178,7 +178,7 @@ public class Atrium {
     public void init(FMLInitializationEvent event) {
         customMainScreen = new GuiCustomMainScreen();
         Display.setTitle("Atrium | v" + MODVER);
-		setWindowsIcon();
+        setWindowsIcon();
         Atrium.load();
     }
 }

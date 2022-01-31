@@ -16,11 +16,11 @@ public class ClickGui
     private static ClickGui INSTANCE = new ClickGui();
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", false));
     public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", true));
-	public Setting<Boolean> snowing = this.register(new Setting<Boolean>("Snowing", true));
-	public Setting<Boolean> moduleDescription = this.register(new Setting<Boolean>("Description", true));
-	public Setting<Boolean> blurEffect = this.register(new Setting <Boolean>("Blur", false));
-	public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true));
-    public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30,  v -> this.scroll.getValue()));
+    public Setting<Boolean> snowing = this.register(new Setting<Boolean>("Snowing", true));
+    public Setting<Boolean> moduleDescription = this.register(new Setting<Boolean>("Description", true));
+    public Setting<Boolean> blurEffect = this.register(new Setting<Boolean>("Blur", false));
+    public Setting<Boolean> scroll = this.register(new Setting<Boolean>("Scroll", true));
+    public Setting<Integer> scrollval = this.register(new Setting<Integer>("Scroll Speed", 10, 1, 30, v -> this.scroll.getValue()));
     public Setting<Boolean> rainbowRolling = this.register(new Setting<Object>("RollingRainbow", Boolean.valueOf(false), v -> this.colorSync.getValue() != false && Colors.INSTANCE.rainbow.getValue() != false));
     public Setting<String> prefix = this.register(new Setting<String>("Prefix", ".").setRenderName(true));
     public Setting<Integer> red = this.register(new Setting<Integer>("Red", 0, 0, 255));
@@ -28,7 +28,7 @@ public class ClickGui
     public Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 255, 0, 255));
     public Setting<Integer> hoverAlpha = this.register(new Setting<Integer>("Alpha", 165, 0, 255));
     public Setting<Integer> alpha = this.register(new Setting<Integer>("HoverAlpha", 240, 0, 255));
-	public Setting<Integer> backgroundAlpha = this.register(new Setting<Integer>("BackgroundAlpha", 145, 0, 255));
+    public Setting<Integer> backgroundAlpha = this.register(new Setting<Integer>("BackgroundAlpha", 145, 0, 255));
     public Setting<Boolean> customFov = this.register(new Setting<Boolean>("CustomFov", false));
     public Setting<Float> fov = this.register(new Setting<Object>("Fov", Float.valueOf(135.0f), Float.valueOf(-180.0f), Float.valueOf(180.0f), v -> this.customFov.getValue()));
     public Setting<Boolean> openCloseChange = this.register(new Setting<Boolean>("Open/Close", true));
@@ -40,12 +40,12 @@ public class ClickGui
     public Setting<Integer> topGreen = this.register(new Setting<Object>("TopGreen", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.devSettings.getValue()));
     public Setting<Integer> topBlue = this.register(new Setting<Object>("TopBlue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.devSettings.getValue()));
     public Setting<Integer> topAlpha = this.register(new Setting<Object>("TopAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.devSettings.getValue()));
-	public Setting<Boolean> particles = this.register(new Setting<Boolean>("Particles", false));
+    public Setting<Boolean> particles = this.register(new Setting<Boolean>("Particles", false));
     public Setting<Integer> particleLength = this.register(new Setting<Integer>("ParticleLength", 80, 0, 300, v -> this.particles.getValue()));
     public Setting<Integer> particlered = this.register(new Setting<Integer>("ParticleRed", 255, 0, 255, v -> this.particles.getValue()));
     public Setting<Integer> particlegreen = this.register(new Setting<Integer>("ParticleGreen", 255, 0, 255, v -> this.particles.getValue()));
     public Setting<Integer> particleblue = this.register(new Setting<Integer>("ParticleBlue", 255, 0, 255, v -> this.particles.getValue()));
-	public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true));
+    public Setting<Boolean> frameSettings = this.register(new Setting<Boolean>("FrameSetting", true));
     public Setting<Integer> frameRed = this.register(new Setting<Integer>("FrameRed", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
     public Setting<Integer> frameGreen = this.register(new Setting<Integer>("FrameGreen", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
     public Setting<Integer> frameBlue = this.register(new Setting<Integer>("FrameBlue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.frameSettings.getValue()));
@@ -88,9 +88,9 @@ public class ClickGui
     @Override
     public void onEnable() {
         Util.mc.displayGuiScreen(new AtriumGui());
-		if (this.blurEffect.getValue()) {
+        if (this.blurEffect.getValue()) {
             ClickGui.mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
-	    }
+        }
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ClickGui
     public void onTick() {
         if (!(ClickGui.mc.currentScreen instanceof AtriumGui)) {
             this.disable();
-			if (mc.entityRenderer.getShaderGroup() != null)
+            if (mc.entityRenderer.getShaderGroup() != null)
                 mc.entityRenderer.getShaderGroup().deleteShaderGroup();
         }
     }

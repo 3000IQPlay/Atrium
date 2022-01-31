@@ -9,7 +9,7 @@ public class FriendSettings extends Module {
     public Setting<Boolean> notify = this.register(new Setting("Notify", false));
 
 
-    public FriendSettings(){
+    public FriendSettings() {
         super("FriendSettings", "Change aspects of friends", Category.CLIENT, true, false, false);
         INSTANCE = this;
     }

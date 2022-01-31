@@ -13,10 +13,10 @@ import org.lwjgl.input.Mouse;
 
 public class Slider
         extends Button {
-    public Setting setting;
     private final Number min;
     private final Number max;
     private final int difference;
+    public Setting setting;
 
     public Slider(Setting setting) {
         super(setting.getName());

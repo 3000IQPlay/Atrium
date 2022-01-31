@@ -2,6 +2,7 @@ package me._3000IQPlay.atrium.features.modules.player;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.event.events.ClientEvent;
 import me._3000IQPlay.atrium.features.command.Command;
@@ -10,7 +11,7 @@ import me._3000IQPlay.atrium.features.setting.Setting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class AntiPing
-extends Module {
+        extends Module {
     private static AntiPing instance;
     public final Setting<Boolean> full = this.register(new Setting<Boolean>("Full", false));
     private final Map<String, Setting> servers = new ConcurrentHashMap<String, Setting>();
@@ -45,7 +46,7 @@ extends Module {
                 if (setting.equals(this.enabled) || setting.equals(this.drawn) || setting.equals(this.bind) || setting.equals(this.newIP) || setting.equals(this.showServer) || setting.equals(this.full)) {
                     return;
                 }
-                if (setting.getValue() instanceof Boolean && !((Boolean)setting.getPlannedValue()).booleanValue()) {
+                if (setting.getValue() instanceof Boolean && !((Boolean) setting.getPlannedValue()).booleanValue()) {
                     this.servers.remove(setting.getName().toLowerCase());
                     this.unregister(setting);
                     event.setCanceled(true);

@@ -19,6 +19,7 @@ public class Killaura
         extends Module {
     public static Entity target;
     private final Timer timer = new Timer();
+    private final Setting<TargetMode> targetMode = this.register(new Setting<TargetMode>("Target", TargetMode.CLOSEST));
     public Setting<Float> range = this.register(new Setting<Float>("Range", Float.valueOf(6.0f), Float.valueOf(0.1f), Float.valueOf(7.0f)));
     public Setting<Boolean> autoSwitch = this.register(new Setting<Boolean>("AutoSwitch", false));
     public Setting<Boolean> delay = this.register(new Setting<Boolean>("Delay", true));
@@ -45,7 +46,6 @@ public class Killaura
     public Setting<Boolean> swing = this.register(new Setting<Boolean>("Swing", true));
     public Setting<Boolean> sneak = this.register(new Setting<Boolean>("State", false));
     public Setting<Boolean> info = this.register(new Setting<Boolean>("Info", true));
-    private final Setting<TargetMode> targetMode = this.register(new Setting<TargetMode>("Target", TargetMode.CLOSEST));
     public Setting<Float> health = this.register(new Setting<Object>("Health", Float.valueOf(6.0f), Float.valueOf(0.1f), Float.valueOf(36.0f), v -> this.targetMode.getValue() == TargetMode.SMART));
 
     public Killaura() {

@@ -3,6 +3,7 @@ package me._3000IQPlay.atrium.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -32,10 +33,10 @@ public class BurrowUtil {
         }
         BlockPos neighbour = pos.offset(side);
         EnumFacing opposite = side.getOpposite();
-        Vec3d hitVec = new Vec3d((Vec3i)neighbour).add(0.5, 0.5, 0.5).add(new Vec3d(opposite.getDirectionVec()).scale(0.5));
+        Vec3d hitVec = new Vec3d((Vec3i) neighbour).add(0.5, 0.5, 0.5).add(new Vec3d(opposite.getDirectionVec()).scale(0.5));
         Block neighbourBlock = BurrowUtil.mc.world.getBlockState(neighbour).getBlock();
         if (!BurrowUtil.mc.player.isSneaking()) {
-            BurrowUtil.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity)BurrowUtil.mc.player, CPacketEntityAction.Action.START_SNEAKING));
+            BurrowUtil.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) BurrowUtil.mc.player, CPacketEntityAction.Action.START_SNEAKING));
             BurrowUtil.mc.player.setSneaking(true);
             sneaking = true;
         }
@@ -53,7 +54,8 @@ public class BurrowUtil {
         for (EnumFacing side : EnumFacing.values()) {
             IBlockState blockState;
             BlockPos neighbour = pos.offset(side);
-            if (!BurrowUtil.mc.world.getBlockState(neighbour).getBlock().canCollideCheck(BurrowUtil.mc.world.getBlockState(neighbour), false) || (blockState = BurrowUtil.mc.world.getBlockState(neighbour)).getMaterial().isReplaceable()) continue;
+            if (!BurrowUtil.mc.world.getBlockState(neighbour).getBlock().canCollideCheck(BurrowUtil.mc.world.getBlockState(neighbour), false) || (blockState = BurrowUtil.mc.world.getBlockState(neighbour)).getMaterial().isReplaceable())
+                continue;
             facings.add(side);
         }
         return facings;
@@ -69,7 +71,7 @@ public class BurrowUtil {
     }
 
     public static Vec3d getEyesPos() {
-        return new Vec3d(BurrowUtil.mc.player.posX, BurrowUtil.mc.player.posY + (double)BurrowUtil.mc.player.getEyeHeight(), BurrowUtil.mc.player.posZ);
+        return new Vec3d(BurrowUtil.mc.player.posX, BurrowUtil.mc.player.posY + (double) BurrowUtil.mc.player.getEyeHeight(), BurrowUtil.mc.player.posZ);
     }
 
     public static float[] getLegitRotations(Vec3d vec) {
@@ -78,22 +80,22 @@ public class BurrowUtil {
         double diffY = vec.y - eyesPos.y;
         double diffZ = vec.z - eyesPos.z;
         double diffXZ = Math.sqrt(diffX * diffX + diffZ * diffZ);
-        float yaw = (float)Math.toDegrees(Math.atan2(diffZ, diffX)) - 90.0f;
-        float pitch = (float)(-Math.toDegrees(Math.atan2(diffY, diffXZ)));
-        return new float[]{BurrowUtil.mc.player.rotationYaw + MathHelper.wrapDegrees((float)(yaw - BurrowUtil.mc.player.rotationYaw)), BurrowUtil.mc.player.rotationPitch + MathHelper.wrapDegrees((float)(pitch - BurrowUtil.mc.player.rotationPitch))};
+        float yaw = (float) Math.toDegrees(Math.atan2(diffZ, diffX)) - 90.0f;
+        float pitch = (float) (-Math.toDegrees(Math.atan2(diffY, diffXZ)));
+        return new float[]{BurrowUtil.mc.player.rotationYaw + MathHelper.wrapDegrees((float) (yaw - BurrowUtil.mc.player.rotationYaw)), BurrowUtil.mc.player.rotationPitch + MathHelper.wrapDegrees((float) (pitch - BurrowUtil.mc.player.rotationPitch))};
     }
 
     public static void faceVector(Vec3d vec, boolean normalizeAngle) {
         float[] rotations = BurrowUtil.getLegitRotations(vec);
-        BurrowUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Rotation(rotations[0], normalizeAngle ? (float)MathHelper.normalizeAngle((int)((int)rotations[1]), (int)360) : rotations[1], BurrowUtil.mc.player.onGround));
+        BurrowUtil.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Rotation(rotations[0], normalizeAngle ? (float) MathHelper.normalizeAngle((int) ((int) rotations[1]), (int) 360) : rotations[1], BurrowUtil.mc.player.onGround));
     }
 
     public static void rightClickBlock(BlockPos pos, Vec3d vec, EnumHand hand, EnumFacing direction, boolean packet) {
         if (packet) {
-            float f = (float)(vec.x - (double)pos.getX());
-            float f1 = (float)(vec.y - (double)pos.getY());
-            float f2 = (float)(vec.z - (double)pos.getZ());
-            BurrowUtil.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItemOnBlock(pos, direction, hand, f, f1, f2));
+            float f = (float) (vec.x - (double) pos.getX());
+            float f1 = (float) (vec.y - (double) pos.getY());
+            float f2 = (float) (vec.z - (double) pos.getZ());
+            BurrowUtil.mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(pos, direction, hand, f, f1, f2));
         } else {
             BurrowUtil.mc.playerController.processRightClickBlock(BurrowUtil.mc.player, BurrowUtil.mc.world, pos, direction, vec, hand);
         }
@@ -109,14 +111,15 @@ public class BurrowUtil {
             if (clazz.isInstance(stack.getItem())) {
                 return i;
             }
-            if (!(stack.getItem() instanceof ItemBlock) || !clazz.isInstance(block = ((ItemBlock)stack.getItem()).getBlock())) continue;
+            if (!(stack.getItem() instanceof ItemBlock) || !clazz.isInstance(block = ((ItemBlock) stack.getItem()).getBlock()))
+                continue;
             return i;
         }
         return -1;
     }
 
     public static void switchToSlot(int slot) {
-        BurrowUtil.mc.player.connection.sendPacket((Packet)new CPacketHeldItemChange(slot));
+        BurrowUtil.mc.player.connection.sendPacket((Packet) new CPacketHeldItemChange(slot));
         BurrowUtil.mc.player.inventory.currentItem = slot;
         BurrowUtil.mc.playerController.updateController();
     }

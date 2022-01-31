@@ -73,13 +73,13 @@ public class ModuleButton
                     item.update();
                 }
             }
-		}
-		if (this.isHovering(mouseX, mouseY)) {
+        }
+        if (this.isHovering(mouseX, mouseY)) {
             DescriptionDisplay descriptionDisplay = AtriumGui.getInstance().getDescriptionDisplay();
             descriptionDisplay.setDescription(this.module.getDescription());
             descriptionDisplay.setLocation(mouseX + 2, mouseY + 1);
             descriptionDisplay.setDraw(true);
-        } 
+        }
     }
 
     @Override

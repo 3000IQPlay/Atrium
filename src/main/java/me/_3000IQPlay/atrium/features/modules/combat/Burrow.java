@@ -18,7 +18,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 public class Burrow
-extends Module {
+        extends Module {
     private final Setting<Integer> offset = this.register(new Setting<Integer>("Offset", 3, -5, 5));
     private final Setting<Boolean> ground = this.register(new Setting<Boolean>("Ground check", true));
     private final Setting<Boolean> rotate = this.register(new Setting<Boolean>("Rotate", false));
@@ -57,13 +57,13 @@ extends Module {
             this.toggle();
             return;
         }
-        Burrow.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 0.41999998688698, Burrow.mc.player.posZ, true));
-        Burrow.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 0.7531999805211997, Burrow.mc.player.posZ, true));
-        Burrow.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 1.00133597911214, Burrow.mc.player.posZ, true));
-        Burrow.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 1.16610926093821, Burrow.mc.player.posZ, true));
+        Burrow.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 0.41999998688698, Burrow.mc.player.posZ, true));
+        Burrow.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 0.7531999805211997, Burrow.mc.player.posZ, true));
+        Burrow.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 1.00133597911214, Burrow.mc.player.posZ, true));
+        Burrow.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + 1.16610926093821, Burrow.mc.player.posZ, true));
         BurrowUtil.placeBlock(this.originalPos, EnumHand.MAIN_HAND, this.rotate.getValue(), true, false);
-        Burrow.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + (double)this.offset.getValue().intValue(), Burrow.mc.player.posZ, false));
-        Burrow.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity)Burrow.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+        Burrow.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Burrow.mc.player.posX, Burrow.mc.player.posY + (double) this.offset.getValue().intValue(), Burrow.mc.player.posZ, false));
+        Burrow.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) Burrow.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
         Burrow.mc.player.setSneaking(false);
         BurrowUtil.switchToSlot(this.oldSlot);
         this.toggle();
@@ -71,7 +71,8 @@ extends Module {
 
     private boolean intersectsWithEntity(BlockPos pos) {
         for (Entity entity : Burrow.mc.world.loadedEntityList) {
-            if (entity.equals((Object)Burrow.mc.player) || entity instanceof EntityItem || !new AxisAlignedBB(pos).intersects(entity.getEntityBoundingBox())) continue;
+            if (entity.equals((Object) Burrow.mc.player) || entity instanceof EntityItem || !new AxisAlignedBB(pos).intersects(entity.getEntityBoundingBox()))
+                continue;
             return true;
         }
         return false;

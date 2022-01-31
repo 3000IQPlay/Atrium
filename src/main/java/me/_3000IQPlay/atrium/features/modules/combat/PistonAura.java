@@ -3,6 +3,7 @@ package me._3000IQPlay.atrium.features.modules.combat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
 import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.features.command.Command;
 import me._3000IQPlay.atrium.features.modules.Module;
@@ -32,6 +33,7 @@ import net.minecraft.util.math.Vec3i;
 
 public class PistonAura
         extends Module {
+    public EntityPlayer target = null;
     private Setting<redstone> redstoneType = this.register(new Setting<redstone>("Redstone", redstone.Torch, " redstone type"));
     private Setting<Integer> start_delay = this.register(new Setting<Integer>("Start Delay", 1, 0, 10));
     private Setting<Integer> place_delay = this.register(new Setting<Integer>("Place Delay", 1, 0, 10));
@@ -46,7 +48,6 @@ public class PistonAura
     private Setting<arm> swingArm = this.register(new Setting<arm>("Swing Arm", arm.MainHand));
     private Setting<Boolean> antiweakness = this.register(new Setting<Boolean>("AntiWeakness", false));
     private Setting<Boolean> toggle = this.register(new Setting<Boolean>("Toggle", true));
-    public EntityPlayer target = null;
     private boolean r_redstone = false;
     private int b_stage = 0;
     private BlockPos b_crystal = null;
@@ -85,9 +86,9 @@ public class PistonAura
             int oldslot = PistonAura.mc.player.inventory.currentItem;
             int pickaxe = this.findItem(Items.DIAMOND_PICKAXE);
             int crystal = this.findItem(Items.END_CRYSTAL);
-            int piston = this.findMaterials((Block)Blocks.PISTON);
+            int piston = this.findMaterials((Block) Blocks.PISTON);
             if (piston == -1) {
-                piston = this.findMaterials((Block)Blocks.STICKY_PISTON);
+                piston = this.findMaterials((Block) Blocks.STICKY_PISTON);
             }
             int redstone2 = this.findMaterials(Blocks.REDSTONE_TORCH);
             this.isTorch = true;
@@ -108,7 +109,7 @@ public class PistonAura
             this.debug_stage = 0;
             if (this.target == null) {
                 if (this.target_type.getValue() == types.Nearest) {
-                    this.target = PistonAura.mc.world.playerEntities.stream().filter(p -> p.entityId != PistonAura.mc.player.entityId).min(Comparator.comparing(p -> Float.valueOf(PistonAura.mc.player.getDistance((Entity)p)))).orElse(null);
+                    this.target = PistonAura.mc.world.playerEntities.stream().filter(p -> p.entityId != PistonAura.mc.player.entityId).min(Comparator.comparing(p -> Float.valueOf(PistonAura.mc.player.getDistance((Entity) p)))).orElse(null);
                 }
                 if (this.target_type.getValue() == types.Looking) {
                     // empty if block
@@ -147,7 +148,7 @@ public class PistonAura
                 this.timer = 0;
                 PistonAura.mc.player.inventory.currentItem = obsidian;
                 PistonAura.mc.playerController.updateController();
-                BlockPos first = new BlockPos((Math.floor(this.target.posX) - (double)this.b_crystal.getX()) * 1.0 + this.target.posX, (double)this.b_piston.getY(), (Math.floor(this.target.posZ) - (double)this.b_crystal.getZ()) * 1.0 + this.target.posZ);
+                BlockPos first = new BlockPos((Math.floor(this.target.posX) - (double) this.b_crystal.getX()) * 1.0 + this.target.posX, (double) this.b_piston.getY(), (Math.floor(this.target.posZ) - (double) this.b_crystal.getZ()) * 1.0 + this.target.posZ);
                 if (this.trapprogress == 0 || this.trapprogress == 1) {
                     BlockPos pos = first;
                     if (this.trapprogress == 1) {
@@ -196,7 +197,7 @@ public class PistonAura
                 PistonAura.mc.player.inventory.currentItem = pickaxe;
                 PistonAura.mc.playerController.updateController();
                 if (this.b_stage == 0) {
-                    PistonAura.mc.player.connection.sendPacket((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, this.b_redStone, EnumFacing.DOWN));
+                    PistonAura.mc.player.connection.sendPacket((Packet) new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, this.b_redStone, EnumFacing.DOWN));
                     this.b_stage = 1;
                 } else if (this.b_stage == 1) {
                     PistonAura.mc.playerController.onPlayerDamageBlock(this.b_redStone, EnumFacing.DOWN);
@@ -212,8 +213,8 @@ public class PistonAura
                 this.timer = 0;
                 PistonAura.mc.player.inventory.currentItem = piston;
                 PistonAura.mc.playerController.updateController();
-                float[] angle = MathUtil.calcAngle(new Vec3d((Vec3i)this.b_piston), new Vec3d((Vec3i)this.b_crystal));
-                PistonAura.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Rotation(angle[0] + 180.0f, angle[1], true));
+                float[] angle = MathUtil.calcAngle(new Vec3d((Vec3i) this.b_piston), new Vec3d((Vec3i) this.b_crystal));
+                PistonAura.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Rotation(angle[0] + 180.0f, angle[1], true));
                 BlockUtil.placeBlock(this.b_piston, EnumHand.MAIN_HAND, false, this.packetPlace.getValue(), false);
                 this.p_piston = true;
             }
@@ -228,7 +229,7 @@ public class PistonAura
                     PistonAura.mc.player.inventory.currentItem = crystal;
                 }
                 PistonAura.mc.playerController.updateController();
-                AutoCrystal.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItemOnBlock(this.b_crystal, EnumFacing.UP, PistonAura.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
+                AutoCrystal.mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(this.b_crystal, EnumFacing.UP, PistonAura.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
                 this.p_crystal = true;
             }
             this.debug_stage = 9;
@@ -267,7 +268,7 @@ public class PistonAura
                     PistonAura.mc.player.inventory.currentItem = sword;
                     PistonAura.mc.playerController.updateController();
                 }
-                PistonAura.mc.player.connection.sendPacket((Packet)new CPacketUseEntity(t_crystal));
+                PistonAura.mc.player.connection.sendPacket((Packet) new CPacketUseEntity(t_crystal));
                 if (this.swingArm.getValue() != arm.None) {
                     PistonAura.mc.player.swingArm(this.swingArm.getValue() == arm.MainHand ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND);
                 }
@@ -285,8 +286,7 @@ public class PistonAura
             }
             PistonAura.mc.player.inventory.currentItem = oldslot;
             PistonAura.mc.playerController.updateController();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Command.sendMessage("Has Error! : " + ex.toString());
             Command.sendMessage("Stage : " + this.debug_stage);
             Command.sendMessage("Trying to init...");
@@ -297,7 +297,8 @@ public class PistonAura
 
     private int findMaterials(Block b) {
         for (int i = 0; i < 9; ++i) {
-            if (!(PistonAura.mc.player.inventory.getStackInSlot(i).getItem() instanceof ItemBlock) || ((ItemBlock)PistonAura.mc.player.inventory.getStackInSlot(i).getItem()).getBlock() != b) continue;
+            if (!(PistonAura.mc.player.inventory.getStackInSlot(i).getItem() instanceof ItemBlock) || ((ItemBlock) PistonAura.mc.player.inventory.getStackInSlot(i).getItem()).getBlock() != b)
+                continue;
             return i;
         }
         return -1;
@@ -324,10 +325,10 @@ public class PistonAura
             }
         }
         this.debug_stage = -3;
-        this.b_crystal = this.c_crystal.stream().min(Comparator.comparing(b -> PistonAura.mc.player.getDistance((double)b.getX(), (double)b.getY(), (double)b.getZ()))).orElse(null);
-        this.b_piston = this.c_piston.stream().min(Comparator.comparing(b -> this.b_crystal.distanceSq((Vec3i)b))).orElse(null);
+        this.b_crystal = this.c_crystal.stream().min(Comparator.comparing(b -> PistonAura.mc.player.getDistance((double) b.getX(), (double) b.getY(), (double) b.getZ()))).orElse(null);
+        this.b_piston = this.c_piston.stream().min(Comparator.comparing(b -> this.b_crystal.distanceSq((Vec3i) b))).orElse(null);
         if (this.b_piston != null) {
-            this.b_redStone = this.c_redStone.stream().filter(b -> this.b_piston.getDistance(b.getX(), b.getY(), b.getZ()) < 2.0).min(Comparator.comparing(b -> this.b_crystal.distanceSq((Vec3i)b))).orElse(null);
+            this.b_redStone = this.c_redStone.stream().filter(b -> this.b_piston.getDistance(b.getX(), b.getY(), b.getZ()) < 2.0).min(Comparator.comparing(b -> this.b_crystal.distanceSq((Vec3i) b))).orElse(null);
         }
         this.debug_stage = -4;
         if (this.b_crystal == null) {
@@ -359,8 +360,9 @@ public class PistonAura
             ArrayList<BlockPos> pre_redstone_place = new ArrayList<BlockPos>();
             Object tmp = null;
             for (int o = 0; o < t_offset.length; ++o) {
-                BlockPos pre_redstone_offset = pre_piston.add((Vec3i)t_offset[o]);
-                if (!this.isAir(this.getBlock(pre_redstone_offset).getBlock()) || pre_redstone_offset.getX() == mypos.getX() && (pre_redstone_offset.getY() == mypos.getY() || pre_redstone_offset.getY() == mypos.getY() + 1) && pre_redstone_offset.getZ() == mypos.getZ() || !(pre_crystal.getDistance(pre_redstone_offset.getX(), pre_redstone_offset.getY(), pre_redstone_offset.getZ()) > 1.0)) continue;
+                BlockPos pre_redstone_offset = pre_piston.add((Vec3i) t_offset[o]);
+                if (!this.isAir(this.getBlock(pre_redstone_offset).getBlock()) || pre_redstone_offset.getX() == mypos.getX() && (pre_redstone_offset.getY() == mypos.getY() || pre_redstone_offset.getY() == mypos.getY() + 1) && pre_redstone_offset.getZ() == mypos.getZ() || !(pre_crystal.getDistance(pre_redstone_offset.getX(), pre_redstone_offset.getY(), pre_redstone_offset.getZ()) > 1.0))
+                    continue;
                 pre_redstone_place.add(pre_redstone_offset);
             }
             if (this.getBlock(new BlockPos(enemy_pos.getX() + offset.getX() * 3, enemy_pos.getY() + offset.getY() + offset_y + 2, enemy_pos.getZ() + offset.getZ() * 3)).getBlock() == Blocks.AIR && this.getBlock(new BlockPos(enemy_pos.getX() + offset.getX() * 3, enemy_pos.getY() + offset.getY() + offset_y + 1, enemy_pos.getZ() + offset.getZ() * 3)).getBlock() == Blocks.OBSIDIAN) {
@@ -369,7 +371,7 @@ public class PistonAura
             if (this.getBlock(new BlockPos(enemy_pos.getX() + offset.getX() * 2, enemy_pos.getY() + offset.getY() + offset_y + 2, enemy_pos.getZ() + offset.getZ() * 2)).getBlock() == Blocks.AIR && this.getBlock(new BlockPos(enemy_pos.getX() + offset.getX() * 3, enemy_pos.getY() + offset.getY() + offset_y + 2, enemy_pos.getZ() + offset.getZ() * 3)).getBlock() == Blocks.OBSIDIAN) {
                 pre_redstone_place.add(new BlockPos(enemy_pos.getX() + offset.getX() * 2, enemy_pos.getY() + offset.getY() + offset_y + 2, enemy_pos.getZ() + offset.getZ() * 2));
             }
-            if ((pre_redstone = (BlockPos)pre_redstone_place.stream().min(Comparator.comparing(b -> PistonAura.mc.player.getDistance((double)b.getX(), (double)b.getY(), (double)b.getZ()))).orElse(null)) != null) {
+            if ((pre_redstone = (BlockPos) pre_redstone_place.stream().min(Comparator.comparing(b -> PistonAura.mc.player.getDistance((double) b.getX(), (double) b.getY(), (double) b.getZ()))).orElse(null)) != null) {
                 v_redstone = true;
             }
         } else if (this.isAir(this.getBlock(pre_redstone).getBlock())) {
@@ -418,7 +420,7 @@ public class PistonAura
     }
 
     private float getRange(BlockPos t) {
-        return (float)PistonAura.mc.player.getDistance((double)t.getX(), (double)t.getY(), (double)t.getZ());
+        return (float) PistonAura.mc.player.getDistance((double) t.getX(), (double) t.getY(), (double) t.getZ());
     }
 
     private boolean isAir(Block b) {

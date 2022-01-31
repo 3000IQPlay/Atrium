@@ -13,17 +13,15 @@ import java.util.Random;
 import java.util.UUID;
 
 public class FakePlayer extends Module {
+    private static FakePlayer INSTANCE = new FakePlayer();
     public List<Integer> fakePlayerIdList = new ArrayList<Integer>();
     public Setting<Boolean> moving = this.register(new Setting("Moving", false));
-    private static FakePlayer INSTANCE = new FakePlayer();
-
+    private EntityOtherPlayerMP otherPlayer;
 
     public FakePlayer() {
         super("FakePlayer", "Spawns fake player", Category.PLAYER, false, false, false);
         this.setInstance();
     }
-
-    private EntityOtherPlayerMP otherPlayer;
 
     public static FakePlayer getInstance() {
         if (INSTANCE == null) {
@@ -90,7 +88,7 @@ public class FakePlayer extends Module {
         this.addFakePlayer(-100);
     }
 
-    public void addFakePlayer(int entityId){
+    public void addFakePlayer(int entityId) {
         if (otherPlayer == null) {
             otherPlayer = new EntityOtherPlayerMP(mc.world, new GameProfile(UUID.randomUUID(), "_3000IQPlay"));
             otherPlayer.copyLocationAndAnglesFrom(mc.player);

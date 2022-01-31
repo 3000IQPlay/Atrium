@@ -5,11 +5,11 @@ import me._3000IQPlay.atrium.features.modules.Module;
 
 public class Suicide
         extends Module {
-	public Suicide() {
+    public Suicide() {
         super("Suicide", "Auto suicide.", Module.Category.MISC, true, false, false);
     }
 
-@Override
+    @Override
     public void onEnable() {
         mc.player.sendChatMessage("/kill");
         toggle();

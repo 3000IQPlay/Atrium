@@ -12,10 +12,6 @@ import org.lwjgl.util.glu.Sphere;
 
 
 public class PenisESP extends Module {
-    public PenisESP() {
-        super("PenisESP", "Renders a penis on ur screen", Category.RENDER, true, false, false);
-    }
-
     private Setting<Boolean> self = this.register(new Setting<Boolean>("Self", true));
     private Setting<Float> selfLength = this.register(new Setting<Float>("SelfLength", 1.0f, 0.1f, 5.0f, v -> self.getValue()));
     private Setting<Boolean> friends = this.register(new Setting<Boolean>("Friends", true));
@@ -23,6 +19,9 @@ public class PenisESP extends Module {
     private Setting<Boolean> others = this.register(new Setting<Boolean>("Others", true));
     private Setting<Float> othersLength = this.register(new Setting<Float>("OthersLength", 0.4f, 0.1f, 5.0f, v -> others.getValue()));
     private Setting<Float> penisSize = this.register(new Setting<Float>("Scale", 1.5f, 0.1f, 5.0f));
+    public PenisESP() {
+        super("PenisESP", "Renders a penis on ur screen", Category.RENDER, true, false, false);
+    }
 
     @Override
     public void onRender3D(Render3DEvent event) {
@@ -48,11 +47,11 @@ public class PenisESP extends Module {
     }
 
     private boolean shouldRenderPenis(EntityPlayer player) {
-        if(player.entityUniqueID == mc.player.entityUniqueID) {
+        if (player.entityUniqueID == mc.player.entityUniqueID) {
             return self.getValue();
         }
 
-        if(Atrium.friendManager.isFriend(player)) {
+        if (Atrium.friendManager.isFriend(player)) {
             return friends.getValue();
         }
 
@@ -60,11 +59,11 @@ public class PenisESP extends Module {
     }
 
     private float getPenisLength(EntityPlayer player) {
-        if(player.entityUniqueID == mc.player.entityUniqueID) {
+        if (player.entityUniqueID == mc.player.entityUniqueID) {
             return selfLength.getValue();
         }
 
-        if(Atrium.friendManager.isFriend(player)) {
+        if (Atrium.friendManager.isFriend(player)) {
             return friendLength.getValue();
         }
 
@@ -72,7 +71,7 @@ public class PenisESP extends Module {
     }
 
     public void esp(final EntityPlayer player, final double x, final double y, final double z) {
-        if(!shouldRenderPenis(player)) return;
+        if (!shouldRenderPenis(player)) return;
 
         GL11.glDisable(2896);
         GL11.glDisable(3553);
@@ -87,7 +86,7 @@ public class PenisESP extends Module {
         GL11.glTranslated(-x, -y, -z);
         GL11.glTranslated(x, y + player.height / 2.0f - 0.22499999403953552, z);
         GL11.glColor4f(1.38f, 0.55f, 2.38f, 1.0f);
-        GL11.glRotated((player.isSneaking() ? 35 :0), 1.0f, 0.0f, 0);
+        GL11.glRotated((player.isSneaking() ? 35 : 0), 1.0f, 0.0f, 0);
         GL11.glTranslated(0.0, 0.0, 0.07500000298023224);
         final Cylinder shaft = new Cylinder();
         shaft.setDrawStyle(100013);

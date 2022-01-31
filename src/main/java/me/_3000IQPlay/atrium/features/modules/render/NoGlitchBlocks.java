@@ -46,7 +46,8 @@ public class NoGlitchBlocks
             for (int dy = -4; dy <= 4; ++dy) {
                 for (int dz = -4; dz <= 4; ++dz) {
                     BlockPos blockPos = new BlockPos(pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz);
-                    if (!NoGlitchBlocks.mc.world.getBlockState(blockPos).getBlock().equals((Object)Blocks.AIR)) continue;
+                    if (!NoGlitchBlocks.mc.world.getBlockState(blockPos).getBlock().equals((Object) Blocks.AIR))
+                        continue;
                     NoGlitchBlocks.mc.playerController.processRightClickBlock(NoGlitchBlocks.mc.player, NoGlitchBlocks.mc.world, blockPos, EnumFacing.DOWN, new Vec3d(0.5, 0.5, 0.5), EnumHand.MAIN_HAND);
                 }
             }

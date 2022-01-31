@@ -93,40 +93,40 @@ public class NordTessellator
 
     public static void drawBox(BufferBuilder buffer, double x, double y, double z, float w, float h, float d, int r, int g, int b, int a, int sides) {
         if ((sides & 1) != 0) {
-            buffer.pos(x + (double)w, y, z).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x, y, z + (double)d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y, z).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x, y, z + (double) d).color(r, g, b, a).endVertex();
             buffer.pos(x, y, z).color(r, g, b, a).endVertex();
         }
         if ((sides & 2) != 0) {
-            buffer.pos(x + (double)w, y + (double)h, z).color(r, g, b, a).endVertex();
-            buffer.pos(x, y + (double)h, z).color(r, g, b, a).endVertex();
-            buffer.pos(x, y + (double)h, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y + (double)h, z + (double)d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y + (double) h, z).color(r, g, b, a).endVertex();
+            buffer.pos(x, y + (double) h, z).color(r, g, b, a).endVertex();
+            buffer.pos(x, y + (double) h, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y + (double) h, z + (double) d).color(r, g, b, a).endVertex();
         }
         if ((sides & 4) != 0) {
-            buffer.pos(x + (double)w, y, z).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y, z).color(r, g, b, a).endVertex();
             buffer.pos(x, y, z).color(r, g, b, a).endVertex();
-            buffer.pos(x, y + (double)h, z).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y + (double)h, z).color(r, g, b, a).endVertex();
+            buffer.pos(x, y + (double) h, z).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y + (double) h, z).color(r, g, b, a).endVertex();
         }
         if ((sides & 8) != 0) {
-            buffer.pos(x, y, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y + (double)h, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x, y + (double)h, z + (double)d).color(r, g, b, a).endVertex();
+            buffer.pos(x, y, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y + (double) h, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x, y + (double) h, z + (double) d).color(r, g, b, a).endVertex();
         }
         if ((sides & 16) != 0) {
             buffer.pos(x, y, z).color(r, g, b, a).endVertex();
-            buffer.pos(x, y, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x, y + (double)h, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x, y + (double)h, z).color(r, g, b, a).endVertex();
+            buffer.pos(x, y, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x, y + (double) h, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x, y + (double) h, z).color(r, g, b, a).endVertex();
         }
         if ((sides & 32) != 0) {
-            buffer.pos(x + (double)w, y, z + (double)d).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y, z).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y + (double)h, z).color(r, g, b, a).endVertex();
-            buffer.pos(x + (double)w, y + (double)h, z + (double)d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y, z + (double) d).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y, z).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y + (double) h, z).color(r, g, b, a).endVertex();
+            buffer.pos(x + (double) w, y + (double) h, z + (double) d).color(r, g, b, a).endVertex();
         }
     }
 
@@ -182,10 +182,10 @@ public class NordTessellator
     }
 
     public static void drawRectangle(float x, float y, float w, float h, int color) {
-        float r = (float)(color >> 16 & 255) / 255.0f;
-        float g = (float)(color >> 8 & 255) / 255.0f;
-        float b = (float)(color & 255) / 255.0f;
-        float a = (float)(color >> 24 & 255) / 255.0f;
+        float r = (float) (color >> 16 & 255) / 255.0f;
+        float g = (float) (color >> 8 & 255) / 255.0f;
+        float b = (float) (color & 255) / 255.0f;
+        float a = (float) (color >> 24 & 255) / 255.0f;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         GlStateManager.enableBlend();
@@ -213,9 +213,9 @@ public class NordTessellator
         GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
-        double x = (double)bp.getX() - mc.getRenderManager().viewerPosX;
-        double y = (double)bp.getY() - mc.getRenderManager().viewerPosY;
-        double z = (double)bp.getZ() - mc.getRenderManager().viewerPosZ;
+        double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
+        double y = (double) bp.getY() - mc.getRenderManager().viewerPosY;
+        double z = (double) bp.getZ() - mc.getRenderManager().viewerPosZ;
         AxisAlignedBB bb = new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -259,7 +259,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -291,7 +291,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -323,7 +323,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -356,7 +356,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -387,7 +387,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -422,7 +422,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -454,7 +454,7 @@ public class NordTessellator
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -491,9 +491,9 @@ public class NordTessellator
         GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
-        double x = (double)bp.getX() - mc.getRenderManager().viewerPosX;
-        double y = (double)bp.getY() - mc.getRenderManager().viewerPosY;
-        double z = (double)bp.getZ() - mc.getRenderManager().viewerPosZ;
+        double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
+        double y = (double) bp.getY() - mc.getRenderManager().viewerPosY;
+        double z = (double) bp.getZ() - mc.getRenderManager().viewerPosZ;
         AxisAlignedBB bb = new AxisAlignedBB(x, y, z, x + 1.0, y + .5, z + 1.0);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -528,6 +528,7 @@ public class NordTessellator
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
     }
+
     public static void drawBoundingBottomBoxBlockPos(BlockPos bp, float width, int r, int g, int b, int alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
@@ -539,9 +540,9 @@ public class NordTessellator
         GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
-        double x = (double)bp.getX() - mc.getRenderManager().viewerPosX;
-        double y = (double)bp.getY() - mc.getRenderManager().viewerPosY;
-        double z = (double)bp.getZ() - mc.getRenderManager().viewerPosZ;
+        double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
+        double y = (double) bp.getY() - mc.getRenderManager().viewerPosY;
+        double z = (double) bp.getZ() - mc.getRenderManager().viewerPosZ;
         AxisAlignedBB bb = new AxisAlignedBB(x, y, z, x + 1.0, y + 0.0, z + 1.0);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -588,9 +589,9 @@ public class NordTessellator
         GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
-        double x = (double)bp.getX() + .06 - mc.getRenderManager().viewerPosX;
-        double y = (double)bp.getY() - mc.getRenderManager().viewerPosY;
-        double z = (double)bp.getZ() + .06 - mc.getRenderManager().viewerPosZ;
+        double x = (double) bp.getX() + .06 - mc.getRenderManager().viewerPosX;
+        double y = (double) bp.getY() - mc.getRenderManager().viewerPosY;
+        double z = (double) bp.getZ() + .06 - mc.getRenderManager().viewerPosZ;
         AxisAlignedBB bb = new AxisAlignedBB(x, y, z, x + .881, y + .875, z + .881);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -701,12 +702,14 @@ public class NordTessellator
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
     }
+
     public static void drawFullFace(final AxisAlignedBB bb, final BlockPos blockPos, final float width, final int red, final int green, final int blue, final int alpha, final int alpha2) {
         prepare(7);
         drawFace(blockPos, red, green, blue, alpha, 63);
         release();
         drawBoundingBoxFace(bb, width, red, green, blue, alpha2);
     }
+
     public static void drawFace(final BlockPos blockPos, final int argb, final int sides) {
         final int a = argb >>> 24 & 0xFF;
         final int r = argb >>> 16 & 0xFF;
@@ -729,7 +732,7 @@ public class NordTessellator
     }
 
     public static void drawFace(final BlockPos blockPos, final int r, final int g, final int b, final int a, final int sides) {
-        drawFace(INSTANCE.getBuffer(), (float)blockPos.getX(), (float)blockPos.getY(), (float)blockPos.getZ(), 1.0f, 1.0f, 1.0f, r, g, b, a, sides);
+        drawFace(INSTANCE.getBuffer(), (float) blockPos.getX(), (float) blockPos.getY(), (float) blockPos.getZ(), 1.0f, 1.0f, 1.0f, r, g, b, a, sides);
     }
 
     public static void drawFace(final BufferBuilder buffer, final float x, final float y, final float z, final float w, final float h, final float d, final int r, final int g, final int b, final int a, final int sides) {
@@ -744,9 +747,11 @@ public class NordTessellator
     public static Vec3d getInterpolatedPos(Entity entity, float ticks) {
         return new Vec3d(entity.lastTickPosX, entity.lastTickPosY, entity.lastTickPosZ).add(getInterpolatedAmount(entity, ticks));
     }
+
     public static Vec3d getInterpolatedAmount(Entity entity, double ticks) {
         return getInterpolatedAmount(entity, ticks, ticks, ticks);
     }
+
     public static Vec3d getInterpolatedAmount(Entity entity, double x, double y, double z) {
         return new Vec3d(
                 (entity.posX - entity.lastTickPosX) * x,
@@ -779,10 +784,10 @@ public class NordTessellator
             bottom = j;
         }
 
-        float f3 = (float)(color >> 24 & 255) / 255.0F;
-        float f = (float)(color >> 16 & 255) / 255.0F;
-        float f1 = (float)(color >> 8 & 255) / 255.0F;
-        float f2 = (float)(color & 255) / 255.0F;
+        float f3 = (float) (color >> 24 & 255) / 255.0F;
+        float f = (float) (color >> 16 & 255) / 255.0F;
+        float f1 = (float) (color >> 8 & 255) / 255.0F;
+        float f2 = (float) (color & 255) / 255.0F;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         GlStateManager.enableBlend();

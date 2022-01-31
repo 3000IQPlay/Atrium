@@ -9,18 +9,18 @@ import net.minecraft.util.math.RayTraceResult;
 public class NoEntityTrace extends Module {
 
     private boolean focus = false;
-	
-	public NoEntityTrace() {
+
+    public NoEntityTrace() {
         super("NoEntityTrace", "Mines trought entities", Module.Category.MISC, false, false, false);
     }
 
     @Override
     public void onUpdate() {
-        if(nullCheck())return;
+        if (nullCheck()) return;
         mc.world.loadedEntityList.stream()
                 .filter(entity -> entity instanceof EntityLivingBase)
                 .filter(entity -> mc.player == entity)
-                .map(   entity -> (EntityLivingBase) entity)
+                .map(entity -> (EntityLivingBase) entity)
                 .filter(entity -> !(entity.isDead))
                 .forEach(this::process);
 

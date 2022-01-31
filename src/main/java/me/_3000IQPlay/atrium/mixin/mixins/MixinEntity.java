@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@Mixin(value={Entity.class})
+@Mixin(value = {Entity.class})
 public abstract class MixinEntity {
     @Shadow
     public double posX;
@@ -62,13 +62,6 @@ public abstract class MixinEntity {
     @Shadow
     public World world;
     @Shadow
-    @Final
-    private double[] pistonDeltas;
-    @Shadow
-    private long pistonDeltasGameTime;
-    @Shadow
-    protected boolean isInWeb;
-    @Shadow
     public float stepHeight;
     @Shadow
     public boolean collidedHorizontally;
@@ -81,13 +74,20 @@ public abstract class MixinEntity {
     @Shadow
     public float distanceWalkedOnStepModified;
     @Shadow
+    protected boolean isInWeb;
+    @Shadow
+    protected Random rand;
+    @Shadow
+    @Final
+    private double[] pistonDeltas;
+    @Shadow
+    private long pistonDeltasGameTime;
+    @Shadow
     private int fire;
     @Shadow
     private int nextStepDistance;
     @Shadow
     private float nextFlap;
-    @Shadow
-    protected Random rand;
 
     @Shadow
     public abstract boolean isSprinting();
@@ -99,10 +99,10 @@ public abstract class MixinEntity {
     public abstract boolean isSneaking();
 
     @Shadow
-    public abstract void setEntityBoundingBox(AxisAlignedBB var1);
+    public abstract AxisAlignedBB getEntityBoundingBox();
 
     @Shadow
-    public abstract AxisAlignedBB getEntityBoundingBox();
+    public abstract void setEntityBoundingBox(AxisAlignedBB var1);
 
     @Shadow
     public abstract void resetPositionToBB();
@@ -160,10 +160,13 @@ public abstract class MixinEntity {
 
     @Shadow
     public abstract int getMaxInPortalTime();
-/**Gopro on top*/
+
+    /**
+     * Gopro on top
+     */
     @Overwrite
     public void move(MoverType type, double x, double y, double z) {
-        Entity _this = (Entity)(Object)this;
+        Entity _this = (Entity) (Object) this;
         if (this.noClip) {
             this.setEntityBoundingBox(this.getEntityBoundingBox().offset(x, y, z));
             this.resetPositionToBB();
@@ -180,18 +183,18 @@ public abstract class MixinEntity {
                 }
                 if (x != 0.0) {
                     int j = EnumFacing.Axis.X.ordinal();
-                    double d0 = MathHelper.clamp((double)(x + this.pistonDeltas[j]), (double)-0.51, (double)0.51);
+                    double d0 = MathHelper.clamp((double) (x + this.pistonDeltas[j]), (double) -0.51, (double) 0.51);
                     x = d0 - this.pistonDeltas[j];
                     this.pistonDeltas[j] = d0;
-                    if (Math.abs(x) <= (double)1.0E-5f) {
+                    if (Math.abs(x) <= (double) 1.0E-5f) {
                         return;
                     }
                 } else if (y != 0.0) {
                     int l4 = EnumFacing.Axis.Y.ordinal();
-                    double d12 = MathHelper.clamp((double)(y + this.pistonDeltas[l4]), (double)-0.51, (double)0.51);
+                    double d12 = MathHelper.clamp((double) (y + this.pistonDeltas[l4]), (double) -0.51, (double) 0.51);
                     y = d12 - this.pistonDeltas[l4];
                     this.pistonDeltas[l4] = d12;
-                    if (Math.abs(y) <= (double)1.0E-5f) {
+                    if (Math.abs(y) <= (double) 1.0E-5f) {
                         return;
                     }
                 } else {
@@ -199,10 +202,10 @@ public abstract class MixinEntity {
                         return;
                     }
                     int i5 = EnumFacing.Axis.Z.ordinal();
-                    double d13 = MathHelper.clamp((double)(z + this.pistonDeltas[i5]), (double)-0.51, (double)0.51);
+                    double d13 = MathHelper.clamp((double) (z + this.pistonDeltas[i5]), (double) -0.51, (double) 0.51);
                     z = d13 - this.pistonDeltas[i5];
                     this.pistonDeltas[i5] = d13;
-                    if (Math.abs(z) <= (double)1.0E-5f) {
+                    if (Math.abs(z) <= (double) 1.0E-5f) {
                         return;
                     }
                 }
@@ -214,7 +217,7 @@ public abstract class MixinEntity {
             if (this.isInWeb) {
                 this.isInWeb = false;
                 x *= 0.25;
-                y *= (double)0.05f;
+                y *= (double) 0.05f;
                 z *= 0.25;
                 this.motionX = 0.0;
                 this.motionY = 0.0;
@@ -225,15 +228,15 @@ public abstract class MixinEntity {
             double d4 = z;
             if ((type == MoverType.SELF || type == MoverType.PLAYER) && this.onGround && this.isSneaking() && _this instanceof EntityPlayer) {
                 double d5 = 0.05;
-                while (x != 0.0 && this.world.getCollisionBoxes(_this, this.getEntityBoundingBox().offset(x, (double)(-this.stepHeight), 0.0)).isEmpty()) {
+                while (x != 0.0 && this.world.getCollisionBoxes(_this, this.getEntityBoundingBox().offset(x, (double) (-this.stepHeight), 0.0)).isEmpty()) {
                     x = x < 0.05 && x >= -0.05 ? 0.0 : (x > 0.0 ? (x -= 0.05) : (x += 0.05));
                     d2 = x;
                 }
-                while (z != 0.0 && this.world.getCollisionBoxes(_this, this.getEntityBoundingBox().offset(0.0, (double)(-this.stepHeight), z)).isEmpty()) {
+                while (z != 0.0 && this.world.getCollisionBoxes(_this, this.getEntityBoundingBox().offset(0.0, (double) (-this.stepHeight), z)).isEmpty()) {
                     z = z < 0.05 && z >= -0.05 ? 0.0 : (z > 0.0 ? (z -= 0.05) : (z += 0.05));
                     d4 = z;
                 }
-                while (x != 0.0 && z != 0.0 && this.world.getCollisionBoxes(_this, this.getEntityBoundingBox().offset(x, (double)(-this.stepHeight), z)).isEmpty()) {
+                while (x != 0.0 && z != 0.0 && this.world.getCollisionBoxes(_this, this.getEntityBoundingBox().offset(x, (double) (-this.stepHeight), z)).isEmpty()) {
                     x = x < 0.05 && x >= -0.05 ? 0.0 : (x > 0.0 ? (x -= 0.05) : (x += 0.05));
                     d2 = x;
                     z = z < 0.05 && z >= -0.05 ? 0.0 : (z > 0.0 ? (z -= 0.05) : (z += 0.05));
@@ -245,14 +248,14 @@ public abstract class MixinEntity {
             if (y != 0.0) {
                 int l = list1.size();
                 for (int k = 0; k < l; ++k) {
-                    y = ((AxisAlignedBB)list1.get(k)).calculateYOffset(this.getEntityBoundingBox(), y);
+                    y = ((AxisAlignedBB) list1.get(k)).calculateYOffset(this.getEntityBoundingBox(), y);
                 }
                 this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0, y, 0.0));
             }
             if (x != 0.0) {
                 int l5 = list1.size();
                 for (int j5 = 0; j5 < l5; ++j5) {
-                    x = ((AxisAlignedBB)list1.get(j5)).calculateXOffset(this.getEntityBoundingBox(), x);
+                    x = ((AxisAlignedBB) list1.get(j5)).calculateXOffset(this.getEntityBoundingBox(), x);
                 }
                 if (x != 0.0) {
                     this.setEntityBoundingBox(this.getEntityBoundingBox().offset(x, 0.0, 0.0));
@@ -261,7 +264,7 @@ public abstract class MixinEntity {
             if (z != 0.0) {
                 int i6 = list1.size();
                 for (int k5 = 0; k5 < i6; ++k5) {
-                    z = ((AxisAlignedBB)list1.get(k5)).calculateZOffset(this.getEntityBoundingBox(), z);
+                    z = ((AxisAlignedBB) list1.get(k5)).calculateZOffset(this.getEntityBoundingBox(), z);
                 }
                 if (z != 0.0) {
                     this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0, 0.0, z));
@@ -270,7 +273,7 @@ public abstract class MixinEntity {
             boolean bl = flag = this.onGround || d3 != y && d3 < 0.0;
             if (this.stepHeight > 0.0f && flag && (d2 != x || d4 != z)) {
                 StepEvent preEvent = new StepEvent(0, _this);
-                MinecraftForge.EVENT_BUS.post((Event)preEvent);
+                MinecraftForge.EVENT_BUS.post((Event) preEvent);
                 double d14 = x;
                 double d6 = y;
                 double d7 = z;
@@ -283,38 +286,38 @@ public abstract class MixinEntity {
                 double d8 = y;
                 int k1 = list.size();
                 for (int j1 = 0; j1 < k1; ++j1) {
-                    d8 = ((AxisAlignedBB)list.get(j1)).calculateYOffset(axisalignedbb3, d8);
+                    d8 = ((AxisAlignedBB) list.get(j1)).calculateYOffset(axisalignedbb3, d8);
                 }
                 axisalignedbb2 = axisalignedbb2.offset(0.0, d8, 0.0);
                 double d18 = d2;
                 int i2 = list.size();
                 for (int l1 = 0; l1 < i2; ++l1) {
-                    d18 = ((AxisAlignedBB)list.get(l1)).calculateXOffset(axisalignedbb2, d18);
+                    d18 = ((AxisAlignedBB) list.get(l1)).calculateXOffset(axisalignedbb2, d18);
                 }
                 axisalignedbb2 = axisalignedbb2.offset(d18, 0.0, 0.0);
                 double d19 = d4;
                 int k2 = list.size();
                 for (int j2 = 0; j2 < k2; ++j2) {
-                    d19 = ((AxisAlignedBB)list.get(j2)).calculateZOffset(axisalignedbb2, d19);
+                    d19 = ((AxisAlignedBB) list.get(j2)).calculateZOffset(axisalignedbb2, d19);
                 }
                 axisalignedbb2 = axisalignedbb2.offset(0.0, 0.0, d19);
                 AxisAlignedBB axisalignedbb4 = this.getEntityBoundingBox();
                 double d20 = y;
                 int i3 = list.size();
                 for (int l2 = 0; l2 < i3; ++l2) {
-                    d20 = ((AxisAlignedBB)list.get(l2)).calculateYOffset(axisalignedbb4, d20);
+                    d20 = ((AxisAlignedBB) list.get(l2)).calculateYOffset(axisalignedbb4, d20);
                 }
                 axisalignedbb4 = axisalignedbb4.offset(0.0, d20, 0.0);
                 double d21 = d2;
                 int k3 = list.size();
                 for (int j3 = 0; j3 < k3; ++j3) {
-                    d21 = ((AxisAlignedBB)list.get(j3)).calculateXOffset(axisalignedbb4, d21);
+                    d21 = ((AxisAlignedBB) list.get(j3)).calculateXOffset(axisalignedbb4, d21);
                 }
                 axisalignedbb4 = axisalignedbb4.offset(d21, 0.0, 0.0);
                 double d22 = d4;
                 int i4 = list.size();
                 for (int l3 = 0; l3 < i4; ++l3) {
-                    d22 = ((AxisAlignedBB)list.get(l3)).calculateZOffset(axisalignedbb4, d22);
+                    d22 = ((AxisAlignedBB) list.get(l3)).calculateZOffset(axisalignedbb4, d22);
                 }
                 axisalignedbb4 = axisalignedbb4.offset(0.0, 0.0, d22);
                 double d23 = d18 * d18 + d19 * d19;
@@ -332,7 +335,7 @@ public abstract class MixinEntity {
                 }
                 int k4 = list.size();
                 for (int j4 = 0; j4 < k4; ++j4) {
-                    y = ((AxisAlignedBB)list.get(j4)).calculateYOffset(this.getEntityBoundingBox(), y);
+                    y = ((AxisAlignedBB) list.get(j4)).calculateYOffset(this.getEntityBoundingBox(), y);
                 }
                 this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0, y, 0.0));
                 if (d14 * d14 + d7 * d7 >= x * x + z * z) {
@@ -342,7 +345,7 @@ public abstract class MixinEntity {
                     this.setEntityBoundingBox(axisalignedbb1);
                 } else {
                     StepEvent postEvent = new StepEvent(1, _this);
-                    MinecraftForge.EVENT_BUS.post((Event)postEvent);
+                    MinecraftForge.EVENT_BUS.post((Event) postEvent);
                 }
             }
             this.world.profiler.endSection();
@@ -352,9 +355,9 @@ public abstract class MixinEntity {
             this.collidedVertically = d3 != y;
             this.onGround = this.collidedVertically && d3 < 0.0;
             this.collided = this.collidedHorizontally || this.collidedVertically;
-            int j6 = MathHelper.floor((double)this.posX);
-            int i1 = MathHelper.floor((double)(this.posY - (double)0.2f));
-            int k6 = MathHelper.floor((double)this.posZ);
+            int j6 = MathHelper.floor((double) this.posX);
+            int i1 = MathHelper.floor((double) (this.posY - (double) 0.2f));
+            int k6 = MathHelper.floor((double) this.posZ);
             BlockPos blockpos = new BlockPos(j6, i1, k6);
             IBlockState iblockstate = this.world.getBlockState(blockpos);
             if (iblockstate.getMaterial() == Material.AIR && ((block1 = (iblockstate1 = this.world.getBlockState(blockpos1 = blockpos.down())).getBlock()) instanceof BlockFence || block1 instanceof BlockWall || block1 instanceof BlockFenceGate)) {
@@ -382,14 +385,14 @@ public abstract class MixinEntity {
                 if (block != null && this.onGround) {
                     block.onEntityWalk(this.world, blockpos, _this);
                 }
-                this.distanceWalkedModified = (float)((double)this.distanceWalkedModified + (double)MathHelper.sqrt((double)(d15 * d15 + d17 * d17)) * 0.6);
-                this.distanceWalkedOnStepModified = (float)((double)this.distanceWalkedOnStepModified + (double)MathHelper.sqrt((double)(d15 * d15 + d16 * d16 + d17 * d17)) * 0.6);
-                if (this.distanceWalkedOnStepModified > (float)this.nextStepDistance && iblockstate.getMaterial() != Material.AIR) {
-                    this.nextStepDistance = (int)this.distanceWalkedOnStepModified + 1;
+                this.distanceWalkedModified = (float) ((double) this.distanceWalkedModified + (double) MathHelper.sqrt((double) (d15 * d15 + d17 * d17)) * 0.6);
+                this.distanceWalkedOnStepModified = (float) ((double) this.distanceWalkedOnStepModified + (double) MathHelper.sqrt((double) (d15 * d15 + d16 * d16 + d17 * d17)) * 0.6);
+                if (this.distanceWalkedOnStepModified > (float) this.nextStepDistance && iblockstate.getMaterial() != Material.AIR) {
+                    this.nextStepDistance = (int) this.distanceWalkedOnStepModified + 1;
                     if (this.isInWater()) {
                         Entity entity = this.isBeingRidden() && this.getControllingPassenger() != null ? this.getControllingPassenger() : _this;
                         float f = entity == _this ? 0.35f : 0.4f;
-                        float f1 = MathHelper.sqrt((double)(entity.motionX * entity.motionX * (double)0.2f + entity.motionY * entity.motionY + entity.motionZ * entity.motionZ * (double)0.2f)) * f;
+                        float f1 = MathHelper.sqrt((double) (entity.motionX * entity.motionX * (double) 0.2f + entity.motionY * entity.motionY + entity.motionZ * entity.motionZ * (double) 0.2f)) * f;
                         if (f1 > 1.0f) {
                             f1 = 1.0f;
                         }
@@ -403,9 +406,8 @@ public abstract class MixinEntity {
             }
             try {
                 this.doBlockCollisions();
-            }
-            catch (Throwable throwable) {
-                CrashReport crashreport = CrashReport.makeCrashReport((Throwable)throwable, (String)"Checking entity block collision");
+            } catch (Throwable throwable) {
+                CrashReport crashreport = CrashReport.makeCrashReport((Throwable) throwable, (String) "Checking entity block collision");
                 CrashReportCategory crashreportcategory = crashreport.makeCategory("Entity being checked for collision");
                 this.addEntityCrashInfo(crashreportcategory);
                 throw new ReportedException(crashreport);
@@ -430,10 +432,10 @@ public abstract class MixinEntity {
         }
     }
 
-    @Redirect(method={"applyEntityCollision"}, at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;addVelocity(DDD)V"))
+    @Redirect(method = {"applyEntityCollision"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(DDD)V"))
     public void addVelocityHook(Entity entity, double x, double y, double z) {
         PushEvent event = new PushEvent(entity, x, y, z, true);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         if (!event.isCanceled()) {
             entity.motionX += event.x;
             entity.motionY += event.y;

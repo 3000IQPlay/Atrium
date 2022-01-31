@@ -90,15 +90,13 @@ public class Surround
         if (this.check()) {
             return;
         }
-        if (!OyVeyentityUtil.isSafe((Entity)Surround.mc.player, 0, true)) {
+        if (!OyVeyentityUtil.isSafe((Entity) Surround.mc.player, 0, true)) {
             this.isSafe = 0;
-            this.placeBlocks(Surround.mc.player.getPositionVector(), OyVeyentityUtil.getUnsafeBlockArray((Entity)Surround.mc.player, 0, true), true, false, false);
-        }
-        else if (!OyVeyentityUtil.isSafe((Entity)Surround.mc.player, -1, false)) {
+            this.placeBlocks(Surround.mc.player.getPositionVector(), OyVeyentityUtil.getUnsafeBlockArray((Entity) Surround.mc.player, 0, true), true, false, false);
+        } else if (!OyVeyentityUtil.isSafe((Entity) Surround.mc.player, -1, false)) {
             this.isSafe = 1;
-            this.placeBlocks(Surround.mc.player.getPositionVector(), OyVeyentityUtil.getUnsafeBlockArray((Entity)Surround.mc.player, -1, false), false, false, true);
-        }
-        else {
+            this.placeBlocks(Surround.mc.player.getPositionVector(), OyVeyentityUtil.getUnsafeBlockArray((Entity) Surround.mc.player, -1, false), false, false, true);
+        } else {
             this.isSafe = 3;
             if (Util.mc.world.getBlockState(EntityUtil.getRoundedBlockPos(Util.mc.player)).getBlock().equals(Blocks.ENDER_CHEST) && Util.mc.player.posY != EntityUtil.getRoundedBlockPos(Util.mc.player).getY()) {
                 this.placeBlocks(Surround.mc.player.getPositionVector(), OyVeyentityUtil.getUnsafeBlockArray(Surround.mc.player, 1, false), false, false, true);

@@ -56,7 +56,7 @@ public class RenderUtill
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;
@@ -88,7 +88,7 @@ public class RenderUtill
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         GL11.glEnable(2848);
-        GL11.glHint(3154,  4354);
+        GL11.glHint(3154, 4354);
         GL11.glLineWidth(width);
         Minecraft mc = Minecraft.getMinecraft();
         double x = (double) bp.getX() - mc.getRenderManager().viewerPosX;

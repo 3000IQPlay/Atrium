@@ -2,6 +2,7 @@ package me._3000IQPlay.atrium.mixin.mixins;
 
 import java.util.UUID;
 import javax.annotation.Nullable;
+
 import me._3000IQPlay.atrium.features.modules.client.Capes;
 import me._3000IQPlay.atrium.features.modules.render.Chams;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -13,20 +14,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value={AbstractClientPlayer.class})
+@Mixin(value = {AbstractClientPlayer.class})
 public abstract class MixinAbstractClientPlayer {
     @Shadow
     @Nullable
     protected abstract NetworkPlayerInfo getPlayerInfo();
 
-    @Inject(method={"getLocationSkin()Lnet/minecraft/util/ResourceLocation;"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"getLocationSkin()Lnet/minecraft/util/ResourceLocation;"}, at = {@At(value = "HEAD")}, cancellable = true)
     public void getLocationSkin(CallbackInfoReturnable<ResourceLocation> callbackInfoReturnable) {
         if (Chams.getInstance().textured.getValue().booleanValue() && Chams.getInstance().isEnabled()) {
             callbackInfoReturnable.setReturnValue(new ResourceLocation("textures/shinechams3.png"));
         }
     }
 
-    @Inject(method={"getLocationCape"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"getLocationCape"}, at = {@At(value = "HEAD")}, cancellable = true)
     public void getLocationCape(CallbackInfoReturnable<ResourceLocation> callbackInfoReturnable) {
         if (Capes.getInstance().isEnabled()) {
             NetworkPlayerInfo info = this.getPlayerInfo();
@@ -34,7 +35,7 @@ public abstract class MixinAbstractClientPlayer {
             if (info != null) {
                 uuid = this.getPlayerInfo().getGameProfile().getId();
             }
-            ResourceLocation cape = Capes.getCapeResource((AbstractClientPlayer)(Object)this);
+            ResourceLocation cape = Capes.getCapeResource((AbstractClientPlayer) (Object) this);
             if (uuid != null && Capes.hasCape(uuid)) {
                 callbackInfoReturnable.setReturnValue(cape);
             }

@@ -3,6 +3,7 @@ package me._3000IQPlay.atrium.features.modules.combat;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 import me._3000IQPlay.atrium.Atrium;
 import me._3000IQPlay.atrium.event.events.UpdateWalkingPlayerEvent;
 import me._3000IQPlay.atrium.features.command.Command;
@@ -34,10 +35,10 @@ public class AutoCity
 
     public static ArrayList<PairUtil<EntityPlayer, ArrayList<BlockPos>>> GetPlayersReadyToBeCitied() {
         ArrayList<PairUtil<EntityPlayer, ArrayList<BlockPos>>> arrayList = new ArrayList<PairUtil<EntityPlayer, ArrayList<BlockPos>>>();
-        for (EntityPlayer entity : Objects.requireNonNull(EntityUtil.getNearbyPlayers(6.0)).stream().filter(entityPlayer -> !Atrium.friendManager.isFriend((EntityPlayer)entityPlayer)).collect(Collectors.toList())) {
+        for (EntityPlayer entity : Objects.requireNonNull(EntityUtil.getNearbyPlayers(6.0)).stream().filter(entityPlayer -> !Atrium.friendManager.isFriend((EntityPlayer) entityPlayer)).collect(Collectors.toList())) {
             ArrayList<BlockPos> arrayList2 = new ArrayList<BlockPos>();
             for (int i = 0; i < 4; ++i) {
-                BlockPos blockPos = EntityUtil.GetPositionVectorBlockPos((Entity)entity, surroundOffset[i]);
+                BlockPos blockPos = EntityUtil.GetPositionVectorBlockPos((Entity) entity, surroundOffset[i]);
                 if (AutoCity.mc.world.getBlockState(blockPos).getBlock() != Blocks.OBSIDIAN) continue;
                 boolean bl = false;
                 switch (i) {

@@ -9,9 +9,9 @@ import java.util.LinkedList;
 
 public class CommandManager
         extends Feature {
+    private final ArrayList<Command> commands = new ArrayList();
     private String clientMessage = "[Atrium]";
     private String prefix = ".";
-    private final ArrayList<Command> commands = new ArrayList();
 
     public CommandManager() {
         super("Command");

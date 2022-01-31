@@ -43,12 +43,12 @@ public class Strafe
     private final Setting<Integer> groundFactor = this.register(new Setting<Integer>("GroundFactor", 13, 0, 50));
     private final Setting<Integer> step = this.register(new Setting<Object>("SetStep", Integer.valueOf(1), Integer.valueOf(0), Integer.valueOf(2), v -> this.mode.getValue() == Mode.BHOP));
     private final Setting<Boolean> setGroundNoLag = this.register(new Setting<Boolean>("NoGroundLag", true));
+    private final Timer timer = new Timer();
     private int stage = 1;
     private double moveSpeed;
     private double lastDist;
     private int cooldownHops = 0;
     private boolean waitForGround = false;
-    private final Timer timer = new Timer();
     private int hops = 0;
 
     public Strafe() {

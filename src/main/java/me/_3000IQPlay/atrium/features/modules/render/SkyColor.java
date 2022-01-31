@@ -10,26 +10,25 @@ import java.awt.*;
 
 public class SkyColor
         extends Module {
+    private static SkyColor INSTANCE = new SkyColor();
     private Setting<Integer> red = register(new Setting("Red", 255, 0, 255));
     private Setting<Integer> green = register(new Setting("Green", 255, 0, 255));
     private Setting<Integer> blue = register(new Setting("Blue", 255, 0, 255));
     private Setting<Boolean> rainbow = register(new Setting("Rainbow", false));
     private Setting<Boolean> fog = register(new Setting("Fog", true));
 
-    private static SkyColor INSTANCE = new SkyColor();
-
     public SkyColor() {
         super("SkyColor", "Changes the color of the sky", Module.Category.RENDER, false, false, false);
-    }
-
-    private void setInstance() {
-        INSTANCE = this;
     }
 
     public static SkyColor getInstance() {
         if (INSTANCE == null)
             INSTANCE = new SkyColor();
         return INSTANCE;
+    }
+
+    private void setInstance() {
+        INSTANCE = this;
     }
 
     @SubscribeEvent
@@ -42,7 +41,7 @@ public class SkyColor
     @SubscribeEvent
     public void fog_density(final EntityViewRenderEvent.FogDensity event) {
 
-        if(fog.getValue().booleanValue()) {
+        if (fog.getValue().booleanValue()) {
             event.setDensity(0.0f);
             event.setCanceled(true);
         }

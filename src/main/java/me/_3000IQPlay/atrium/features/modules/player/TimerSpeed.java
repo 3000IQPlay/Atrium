@@ -7,6 +7,8 @@ import me._3000IQPlay.atrium.util.Timer;
 
 public class TimerSpeed
         extends Module {
+    private final Timer timer = new Timer();
+    private final Timer turnOffTimer = new Timer();
     public Setting<Boolean> autoOff = this.register(new Setting<Boolean>("AutoOff", false));
     public Setting<Integer> timeLimit = this.register(new Setting<Object>("Limit", Integer.valueOf(250), Integer.valueOf(1), Integer.valueOf(2500), v -> this.autoOff.getValue()));
     public Setting<TimerMode> mode = this.register(new Setting<TimerMode>("Mode", TimerMode.NORMAL));
@@ -16,8 +18,6 @@ public class TimerSpeed
     public Setting<Integer> slowTime = this.register(new Setting<Object>("SlowTime", 20, 1, 500, v -> this.mode.getValue() == TimerMode.SWITCH, "Recover from too fast.(ms * 10)"));
     public Setting<Boolean> startFast = this.register(new Setting<Object>("StartFast", Boolean.valueOf(false), v -> this.mode.getValue() == TimerMode.SWITCH));
     public float speed = 1.0f;
-    private final Timer timer = new Timer();
-    private final Timer turnOffTimer = new Timer();
     private boolean fast = false;
 
     public TimerSpeed() {

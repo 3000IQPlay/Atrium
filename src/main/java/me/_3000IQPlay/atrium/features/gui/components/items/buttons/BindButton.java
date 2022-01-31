@@ -14,8 +14,8 @@ import net.minecraft.init.SoundEvents;
 
 public class BindButton
         extends Button {
-    public boolean isListening;
     private final Setting setting;
+    public boolean isListening;
 
     public BindButton(Setting setting) {
         super(setting.getName());

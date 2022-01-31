@@ -24,38 +24,38 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value={EntityPlayerSP.class}, priority=9998)
+@Mixin(value = {EntityPlayerSP.class}, priority = 9998)
 public abstract class MixinEntityPlayerSP
-extends AbstractClientPlayer {
+        extends AbstractClientPlayer {
     public MixinEntityPlayerSP(Minecraft p_i47378_1_, World p_i47378_2_, NetHandlerPlayClient p_i47378_3_, StatisticsManager p_i47378_4_, RecipeBook p_i47378_5_) {
         super(p_i47378_2_, p_i47378_3_.getGameProfile());
     }
 
-    @Inject(method={"sendChatMessage"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"sendChatMessage"}, at = {@At(value = "HEAD")}, cancellable = true)
     public void sendChatMessage(String message, CallbackInfo callback) {
         ChatEvent chatEvent = new ChatEvent(message);
-        MinecraftForge.EVENT_BUS.post((Event)chatEvent);
+        MinecraftForge.EVENT_BUS.post((Event) chatEvent);
     }
 
-    @Inject(method={"pushOutOfBlocks"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"pushOutOfBlocks"}, at = {@At(value = "HEAD")}, cancellable = true)
     private void pushOutOfBlocksHook(double x, double y, double z, CallbackInfoReturnable<Boolean> info) {
         PushEvent event = new PushEvent(1);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         if (event.isCanceled()) {
             info.setReturnValue(false);
         }
     }
 
-    @Inject(method={"onUpdateWalkingPlayer"}, at={@At(value="HEAD")}, cancellable=true)
+    @Inject(method = {"onUpdateWalkingPlayer"}, at = {@At(value = "HEAD")}, cancellable = true)
     private void preMotion(CallbackInfo info) {
         UpdateWalkingPlayerEvent event = new UpdateWalkingPlayerEvent(0);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         if (event.isCanceled()) {
             info.cancel();
         }
     }
 
-    @Redirect(method={"onUpdateWalkingPlayer"}, at=@At(value="FIELD", target="net/minecraft/util/math/AxisAlignedBB.minY:D"))
+    @Redirect(method = {"onUpdateWalkingPlayer"}, at = @At(value = "FIELD", target = "net/minecraft/util/math/AxisAlignedBB.minY:D"))
     private double minYHook(AxisAlignedBB bb) {
         if (Speed.getInstance().isOn() && Speed.getInstance().mode.getValue() == Speed.Mode.VANILLA && Speed.getInstance().changeY) {
             Speed.getInstance().changeY = false;
@@ -64,23 +64,23 @@ extends AbstractClientPlayer {
         return bb.minY;
     }
 
-    @Inject(method={"onUpdateWalkingPlayer"}, at={@At(value="RETURN")})
+    @Inject(method = {"onUpdateWalkingPlayer"}, at = {@At(value = "RETURN")})
     private void postMotion(CallbackInfo info) {
         UpdateWalkingPlayerEvent event = new UpdateWalkingPlayerEvent(1);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
     }
 
-    @Inject(method={"Lnet/minecraft/client/entity/EntityPlayerSP;setServerBrand(Ljava/lang/String;)V"}, at={@At(value="HEAD")})
+    @Inject(method = {"Lnet/minecraft/client/entity/EntityPlayerSP;setServerBrand(Ljava/lang/String;)V"}, at = {@At(value = "HEAD")})
     public void getBrand(String brand, CallbackInfo callbackInfo) {
         if (Atrium.serverManager != null) {
             Atrium.serverManager.setServerBrand(brand);
         }
     }
 
-    @Redirect(method={"move"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/entity/AbstractClientPlayer;move(Lnet/minecraft/entity/MoverType;DDD)V"))
+    @Redirect(method = {"move"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/AbstractClientPlayer;move(Lnet/minecraft/entity/MoverType;DDD)V"))
     public void move(AbstractClientPlayer player, MoverType moverType, double x, double y, double z) {
         MoveEvent event = new MoveEvent(0, moverType, x, y, z);
-        MinecraftForge.EVENT_BUS.post((Event)event);
+        MinecraftForge.EVENT_BUS.post((Event) event);
         if (!event.isCanceled()) {
             super.move(event.getType(), event.getX(), event.getY(), event.getZ());
         }

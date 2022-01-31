@@ -60,6 +60,7 @@ public class HUD
     private final Setting<Boolean> grayNess = this.register(new Setting<Boolean>("FutureColour", false));
     private final Timer timer = new Timer();
     private final Timer moduleTimer = new Timer();
+    private final Map<Potion, Color> potionColorMap = new HashMap<Potion, Color>();
     public Setting<Boolean> colorSync = this.register(new Setting<Boolean>("Sync", Boolean.valueOf(false), "Universal colors for hud."));
     public Setting<Boolean> rainbow = this.register(new Setting<Boolean>("Rainbow", Boolean.valueOf(false), "Rainbow hud."));
     public Setting<Integer> factor = this.register(new Setting<Object>("Factor", Integer.valueOf(1), Integer.valueOf(0), Integer.valueOf(20), v -> this.rainbow.getValue()));
@@ -81,7 +82,6 @@ public class HUD
     public Map<Module, Float> moduleProgressMap = new HashMap<Module, Float>();
     public Map<Integer, Integer> colorMap = new HashMap<Integer, Integer>();
     private Map<String, Integer> players = new HashMap<String, Integer>();
-    private final Map<Potion, Color> potionColorMap = new HashMap<Potion, Color>();
     private int color;
     private boolean shouldIncrement;
     private int hitMarkerTimer;

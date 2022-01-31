@@ -9,25 +9,21 @@ class ChorusEvent
     private final double chorusY;
     private final double chorusZ;
 
-    public
-    ChorusEvent ( double x , double y , double z ) {
+    public ChorusEvent(double x, double y, double z) {
         this.chorusX = x;
         this.chorusY = y;
         this.chorusZ = z;
     }
 
-    public
-    double getChorusX ( ) {
+    public double getChorusX() {
         return this.chorusX;
     }
 
-    public
-    double getChorusY ( ) {
+    public double getChorusY() {
         return this.chorusY;
     }
 
-    public
-    double getChorusZ ( ) {
+    public double getChorusZ() {
         return this.chorusZ;
     }
 }
