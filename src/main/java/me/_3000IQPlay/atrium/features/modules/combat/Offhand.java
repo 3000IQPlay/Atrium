@@ -25,9 +25,9 @@ import org.lwjgl.input.Mouse;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class OffhandRewriten
+public class Offhand
         extends Module {
-    private static OffhandRewriten instance;
+    private static Offhand instance;
     private final Queue<InventoryUtil.Task> taskList = new ConcurrentLinkedQueue<InventoryUtil.Task>();
     private final Timer timer = new Timer();
     private final Timer secondTimer = new Timer();
@@ -56,14 +56,14 @@ public class OffhandRewriten
     private boolean second = false;
     private boolean switchedForHealthReason = false;
 
-    public OffhandRewriten() {
-        super("OffhandRewriten", "Allows you to switch up your Offhand.", Module.Category.COMBAT, true, false, false);
+    public Offhand() {
+        super("Offhand", "Allows you to switch up your Offhand.", Module.Category.COMBAT, true, false, false);
         instance = this;
     }
 
-    public static OffhandRewriten getInstance() {
+    public static Offhand getInstance() {
         if (instance == null) {
-            instance = new OffhandRewriten();
+            instance = new Offhand();
         }
         return instance;
     }
